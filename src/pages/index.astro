@@ -1,0 +1,240 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site, url, nav, stats, services, about, process, projects } from '../config';
+
+const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
+  'Hola Adima Design, quiero cotizar un proyecto.'
+)}`;
+---
+
+<Base>
+  <aside class="rail">
+    <div>
+      <a class="brand" href={url('/')}>
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" stroke="#e4e4e4" />
+          <path d="M32 13 L49 33 H15 Z" />
+          <circle cx="32" cy="43" r="9" />
+          <path d="M32 33 V24" />
+        </svg>
+        <span class="brand-name">{site.name}</span>
+        <span class="brand-sub">{site.tagline}</span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        {nav.map((item) => <a href={url(item.href)} data-hash={item.hash}>{item.label}</a>)}
+      </nav>
+    </div>
+
+    <div class="rail-foot">
+      {site.address}<br />
+      <a href={`mailto:${site.email}`}>{site.email}</a><br />
+      {site.phone}
+    </div>
+  </aside>
+
+  <main class="main">
+    <section class="block" id="inicio">
+      <p class="eyebrow">Diseño y construcción · {site.address}</p>
+      <h1>Espacios pensados, obras bien ejecutadas.</h1>
+      <div class="intro" style="margin-top:2rem">
+        <p class="big">
+          En {site.name} acompañamos tu proyecto desde la primera idea hasta la entrega: diseño
+          arquitectónico, construcción, remodelaciones e interiores con presupuesto claro y
+          cronograma cumplido.
+        </p>
+        <p>
+          Un solo equipo responde por el proyecto completo. Levantamos el espacio, proponemos el
+          diseño, calculamos el presupuesto y ejecutamos la obra con personal propio, de modo que
+          cada decisión se toma con información real y sin intermediarios.
+        </p>
+        <div class="intro-links">
+          <a class="link-more" href={url('/#servicios')}>Servicios</a>
+          <a class="link-more" href={url('/#contacto')}>Cotizar proyecto</a>
+        </div>
+        <p class="todo">
+          Contenido de demostración · falta logo, fotos, datos de contacto y proyectos reales.
+        </p>
+      </div>
+
+      <figure class="media media-lg ratio-32">
+        <figcaption class="media-tag">Imagen principal pendiente</figcaption>
+      </figure>
+    </section>
+
+    <section class="block" id="servicios">
+      <p class="eyebrow">Servicios</p>
+      <h2>Todo lo que necesita tu obra, en un solo equipo</h2>
+      <div class="services" style="margin-top:2.6rem">
+        {services.map((s) => (
+          <article class="service">
+            <div class="service-head">
+              <Icon name={s.icon} size={58} />
+              <span>{s.title}</span>
+            </div>
+            <ul>
+              {s.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="block" id="proyectos">
+      <p class="eyebrow">Proyectos</p>
+      <h2>Obras recientes</h2>
+      <div class="projects" style="margin-top:2.6rem">
+        {projects.map((p) => (
+          <figure class="project">
+            <div class={`media ${p.ratio}`}>
+              <span class="media-tag">Foto pendiente</span>
+            </div>
+            <figcaption>
+              <h3>{p.title}</h3>
+              <span class="meta">{p.type} · {p.meta}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="todo">Galería con fotos reales pendiente.</p>
+    </section>
+
+    <section class="block" id="estudio">
+      <p class="eyebrow">Estudio</p>
+      <h2>Un método, no improvisación</h2>
+
+      <div class="study" style="margin-top:2.6rem">
+        <div class="study-text">
+          {about.map((paragraph) => <p>{paragraph}</p>)}
+          <div class="facts">
+            {stats.map((s) => (
+              <div>
+                <strong>{s.value}</strong>
+                <span>{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="study-media">
+          <figure>
+            <div class="media ratio-43"><span class="media-tag">Foto de obra pendiente</span></div>
+            <figcaption>Supervisión y control de avance</figcaption>
+          </figure>
+          <figure>
+            <div class="media ratio-43"><span class="media-tag">Foto de equipo pendiente</span></div>
+            <figcaption>Equipo propio en {site.address}</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="process">
+        {process.map((p) => (
+          <div>
+            <b>{p.step}</b>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="block" id="contacto">
+      <p class="eyebrow">Contacto</p>
+      <h2>Cuéntanos qué quieres construir</h2>
+
+      <div class="contact" style="margin-top:2.6rem">
+        <div>
+          <dl class="dl">
+            <div><dt>Teléfono</dt><dd>{site.phone}</dd></div>
+            <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+            <div><dt>Ubicación</dt><dd>{site.address}</dd></div>
+            <div><dt>Horario</dt><dd>{site.hours}</dd></div>
+          </dl>
+          <p class="todo">Datos de contacto y WhatsApp pendientes de confirmación.</p>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <label class="field">
+            <span>Nombre y apellido</span>
+            <input type="text" name="nombre" autocomplete="name" required />
+          </label>
+          <label class="field">
+            <span>Teléfono o email</span>
+            <input type="text" name="contacto" autocomplete="tel" required />
+          </label>
+          <label class="field">
+            <span>Tipo de proyecto</span>
+            <select name="tipo">
+              <option value="">Selecciona una opción</option>
+              <option>Diseño arquitectónico</option>
+              <option>Construcción</option>
+              <option>Remodelación</option>
+              <option>Interiores</option>
+              <option>Supervisión / consultoría</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Detalles del proyecto</span>
+            <textarea name="mensaje" rows="4"></textarea>
+          </label>
+          <button class="submit" type="submit">Enviar solicitud</button>
+          <p id="form-status" class="todo" style="display:none"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>© {new Date().getFullYear()} {site.name} · {site.tagline}</span>
+    <span class="social">
+      <a href={site.social.instagram} target="_blank" rel="noopener">
+        <Icon name="instagram" size={26} />Instagram
+      </a>
+      <a href={waLink} target="_blank" rel="noopener">
+        <Icon name="whatsapp" size={26} />WhatsApp
+      </a>
+      <a href={`mailto:${site.email}`}><Icon name="mail" size={26} />Email</a>
+    </span>
+  </footer>
+
+  <script>
+    // Menú: resalta la sección visible (mismo comportamiento que el sitio de referencia).
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a'));
+    const sections = links
+      .map((link) => document.getElementById(link.dataset.hash ?? ''))
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    const setActive = (id: string) => {
+      links.forEach((link) => {
+        if (link.dataset.hash === id) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+    };
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible?.target.id) setActive(visible.target.id);
+        },
+        { rootMargin: '-20% 0px -55% 0px', threshold: [0.05, 0.25, 0.5] }
+      );
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    // Formulario demo: no envía a ningún backend todavía.
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status') as HTMLElement | null;
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!status) return;
+      status.style.display = 'block';
+      status.textContent =
+        'Formulario en modo demostración: aún no hay servicio de envío configurado.';
+    });
+  </script>
+</Base>
