@@ -25,17 +25,17 @@ export const site = {
   // PLACEHOLDER
   social: {
     instagram: 'https://instagram.com/',
-    facebook: 'https://facebook.com/',
-    linkedin: '',
+    whatsapp: 'https://wa.me/580000000000',
   },
 };
 
+/** Menú vertical del riel izquierdo. */
 export const nav = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Servicios', href: '/#servicios' },
-  { label: 'Proyectos', href: '/#proyectos' },
-  { label: 'Nosotros', href: '/#nosotros' },
-  { label: 'Contacto', href: '/#contacto' },
+  { label: 'Inicio', href: '/', hash: 'inicio' },
+  { label: 'Servicios', href: '/#servicios', hash: 'servicios' },
+  { label: 'Proyectos', href: '/#proyectos', hash: 'proyectos' },
+  { label: 'Estudio', href: '/#estudio', hash: 'estudio' },
+  { label: 'Contacto', href: '/#contacto', hash: 'contacto' },
 ];
 
 export const stats = [
@@ -48,40 +48,41 @@ export const stats = [
 export const services = [
   {
     title: 'Diseño arquitectónico',
-    text: 'Concepto, planos y visualización 3D. Proyectos a medida para vivienda, oficina y local comercial.',
     icon: 'plan',
-    items: ['Anteproyecto y planos', 'Render 3D', 'Memoria descriptiva'],
+    items: ['Anteproyecto y planos', 'Visualización 3D', 'Memoria descriptiva'],
   },
   {
-    title: 'Construcción y obra gris',
-    text: 'Ejecución de obra con cronograma, control de calidad y presupuesto cerrado.',
+    title: 'Construcción de obra',
     icon: 'crane',
-    items: ['Fundaciones y estructura', 'Albañilería', 'Instalaciones'],
+    items: ['Fundaciones y estructura', 'Albañilería y acabados', 'Instalaciones'],
   },
   {
     title: 'Remodelaciones',
-    text: 'Transformamos espacios existentes con intervenciones limpias, rápidas y planificadas.',
     icon: 'roller',
     items: ['Cocinas y baños', 'Fachadas', 'Ampliaciones'],
   },
   {
     title: 'Diseño de interiores',
-    text: 'Mobiliario, iluminación y acabados pensados para la forma real de vivir el espacio.',
     icon: 'lamp',
     items: ['Mobiliario a medida', 'Iluminación', 'Selección de acabados'],
   },
   {
     title: 'Supervisión de obra',
-    text: 'Acompañamiento técnico: control de avance, materiales y cumplimiento del presupuesto.',
     icon: 'check',
     items: ['Cómputos y presupuesto', 'Control de avance', 'Informes de obra'],
   },
   {
     title: 'Consultoría y permisos',
-    text: 'Asesoría técnica y gestión documental para que el proyecto avance sin sorpresas.',
     icon: 'doc',
     items: ['Viabilidad', 'Gestión de permisos', 'Avalúos'],
   },
+];
+
+/** Párrafos del bloque "Estudio" (texto justificado, estilo editorial). */
+export const about = [
+  'En Adima Design desarrollamos ideas, ejecutamos proyectos y construimos obras: buscamos espacios eficientes, duraderos y bien resueltos, entendiendo cada encargo como una oportunidad de diseño integral.',
+  'Trabajamos a distintas escalas —mobiliario, interiores y arquitectura— y en todas el detalle es esencial: conocer e involucrar al cliente y al equipo en el proceso, con presupuesto y cronograma claros desde el primer día.',
+  'Valoramos lo hecho en casa. Trabajamos con equipo propio y proveedores locales para reducir costos, controlar la calidad y darle a cada proyecto un valor agregado real.',
 ];
 
 export const process = [
@@ -93,7 +94,10 @@ export const process = [
 
 // PLACEHOLDER: reemplazar por proyectos reales con fotos.
 export const projects = [
-  { title: 'Residencia privada', type: 'Diseño + construcción', meta: '280 m² · Zona Este', tone: 'a' },
-  { title: 'Remodelación de apartamento', type: 'Interiores', meta: '110 m² · Caracas', tone: 'b' },
-  { title: 'Local comercial', type: 'Obra gris + acabados', meta: '90 m² · Zona Centro', tone: 'c' },
+  { title: 'Residencia privada', type: 'Diseño + construcción', meta: '280 m²', ratio: 'ratio-45' },
+  { title: 'Apartamento', type: 'Remodelación integral', meta: '110 m²', ratio: 'ratio-45' },
+  { title: 'Local comercial', type: 'Obra gris y acabados', meta: '90 m²', ratio: 'ratio-45' },
+  { title: 'Casa de campo', type: 'Diseño arquitectónico', meta: '340 m²', ratio: 'ratio-45' },
+  { title: 'Oficinas', type: 'Interiores y mobiliario', meta: '180 m²', ratio: 'ratio-45' },
+  { title: 'Ampliación', type: 'Construcción', meta: '75 m²', ratio: 'ratio-45' },
 ];
