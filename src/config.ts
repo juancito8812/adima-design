@@ -21,7 +21,7 @@ export const site = {
   description:
     'Adima Design LLC — Miami-based studio specialized in venetian plaster, microcement, limewash and epoxy finishes for residential and commercial interiors.',
   // PLACEHOLDER: no email published yet
-  email: 'contacto@adimadesign.com',
+  email: 'hello@adimadesign.com',
   phone: '+1 (786) 727-7419',
   whatsapp: '17867277419',
   // PLACEHOLDER: area code 786 is Miami-Dade, FL — confirm the exact address
