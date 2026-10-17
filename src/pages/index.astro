@@ -1,0 +1,187 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, url, nav, stats, services, process, projects } from '../config';
+
+const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+  'Hola Adima Design, quiero cotizar un proyecto.'
+)}`;
+---
+
+<Base>
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="brand" href={url('/')}>
+        <span class="brand-mark">AD</span>
+        <span>
+          {site.name}
+          <small>{site.tagline}</small>
+        </span>
+      </a>
+      <nav class="nav-desktop">
+        {nav.map((item) => <a href={url(item.href)}>{item.label}</a>)}
+      </nav>
+      <a class="btn btn-primary header-cta" href={url('/#contacto')}>Cotizar proyecto</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Diseño + construcción</p>
+          <h1>Espacios pensados, obras bien ejecutadas.</h1>
+          <p class="lead">
+            En {site.name} acompañamos tu proyecto desde la primera idea hasta la entrega:
+            diseño arquitectónico, construcción, remodelaciones e interiores con presupuesto claro
+            y cronograma cumplido.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href={url('/#contacto')}>Solicitar cotización</a>
+            <a class="btn btn-ghost" href={url('/#servicios')}>Ver servicios</a>
+          </div>
+          <p class="note" style="margin-top:1.5rem">
+            Contenido de demostración: falta logo, fotos, datos de contacto y proyectos reales.
+          </p>
+        </div>
+        <div class="hero-visual">Imagen del proyecto · pendiente</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap stats">
+        {stats.map((s) => (
+          <div class="stat">
+            <strong>{s.value}</strong>
+            <span>{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" id="servicios">
+      <div class="wrap">
+        <p class="eyebrow">Servicios</p>
+        <h2>Todo lo que necesita tu obra, en un solo equipo</h2>
+        <p class="lead">Diseñamos, calculamos, construimos y supervisamos. Un solo responsable, un solo presupuesto.</p>
+        <div class="grid grid-3" style="margin-top:2rem">
+          {services.map((s) => (
+            <article class="card">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+              <ul>
+                {s.items.map((i) => <li>{i}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proyectos">
+      <div class="wrap">
+        <p class="eyebrow">Proyectos</p>
+        <h2>Obras recientes</h2>
+        <p class="lead">Ejemplos de espacios donde el diseño y la ejecución se resolvieron juntos.</p>
+        <div class="grid grid-3" style="margin-top:2rem">
+          {projects.map((p) => (
+            <article class="project">
+              <div class={`project-media tone-${p.tone}`}></div>
+              <div class="project-body">
+                <h3>{p.title}</h3>
+                <p>{p.type} · {p.meta}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p class="note" style="margin-top:1.5rem">Galería con fotos reales pendiente.</p>
+      </div>
+    </section>
+
+    <section class="section" id="nosotros">
+      <div class="wrap">
+        <p class="eyebrow">Nosotros</p>
+        <h2>Un método, no improvisación</h2>
+        <div class="grid grid-4" style="margin-top:2rem">
+          {process.map((p) => (
+            <div class="step">
+              <b>{p.step}</b>
+              <h3>{p.title}</h3>
+              <p style="margin:0;font-size:0.9rem">{p.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="wrap">
+        <p class="eyebrow">Contacto</p>
+        <h2>Cuéntanos qué quieres construir</h2>
+        <div class="contact-grid" style="margin-top:2rem">
+          <div>
+            <ul class="contact-list">
+              <li><span>Teléfono</span><span>{site.phone}</span></li>
+              <li><span>Email</span><span>{site.email}</span></li>
+              <li><span>Ubicación</span><span>{site.address}</span></li>
+              <li><span>Horario</span><span>{site.hours}</span></li>
+            </ul>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href={waLink} target="_blank" rel="noopener">Escribir por WhatsApp</a>
+            </div>
+            <p class="note" style="margin-top:1.25rem">
+              Datos de contacto y número de WhatsApp pendientes de confirmación.
+            </p>
+          </div>
+
+          <form id="contact-form" novalidate>
+            <label>
+              Nombre y apellido
+              <input type="text" name="nombre" autocomplete="name" required />
+            </label>
+            <label>
+              Teléfono o email
+              <input type="text" name="contacto" autocomplete="tel" required />
+            </label>
+            <label>
+              Tipo de proyecto
+              <select name="tipo">
+                <option value="">Selecciona una opción</option>
+                <option>Diseño arquitectónico</option>
+                <option>Construcción</option>
+                <option>Remodelación</option>
+                <option>Interiores</option>
+                <option>Supervisión / consultoría</option>
+              </select>
+            </label>
+            <label>
+              Detalles del proyecto
+              <textarea name="mensaje" rows="4"></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">Enviar solicitud</button>
+            <p id="form-status" class="note" style="display:none"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© {new Date().getFullYear()} {site.name}. Todos los derechos reservados.</span>
+      <span>{site.tagline} · {site.address}</span>
+    </div>
+  </footer>
+
+  <script>
+    // Formulario demo: no envía a ningún backend todavía.
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status') as HTMLElement | null;
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!status) return;
+      status.style.display = 'block';
+      status.textContent =
+        'Formulario en modo demostración: aún no hay servicio de envío configurado.';
+    });
+  </script>
+</Base>
