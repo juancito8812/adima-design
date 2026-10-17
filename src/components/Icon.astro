@@ -10,6 +10,9 @@ const { name, size = 58 } = Astro.props;
 // dentro del círculo. Mismo lenguaje gráfico en todo el sitio.
 const icons: Record<string, string> = {
   plan: '<path d="M3 3h18v18H3z"/><path d="M3 11h18M12 11v10"/><path d="M15 15h3"/>',
+  wall: '<path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6"/>',
+  layers: '<path d="M12 2.5 21 7.5 12 12.5 3 7.5z"/><path d="M3 12.5 12 17.5l9-5"/><path d="M3 17 12 22l9-5"/>',
+  drop: '<path d="M12 2.5c3.6 4.1 6 7.4 6 10.6a6 6 0 0 1-12 0C6 9.9 8.4 6.6 12 2.5z"/><path d="M12 18.5v-5"/>',
   crane: '<path d="M2 22V5h14l5 5"/><path d="M6 22v-9h6v9"/><path d="M5 5h16"/><path d="M21 10v5"/>',
   roller: '<path d="M4 4h13v5H4z"/><path d="M9 9v3h5v9"/><path d="M7 4V2h7v2"/>',
   lamp: '<path d="M11 2v5"/><path d="M5 7h13l3 6H2z"/><path d="M11 13v7"/><path d="M7 20h8"/>',
