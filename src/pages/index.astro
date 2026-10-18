@@ -12,10 +12,10 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
   <aside class="rail">
     <div>
       <a class="brand" href={url('/')}>
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-          <rect x="4" y="4" width="56" height="56" stroke="#e4e4e4" />
-          <path d="M20 46 L32 18 L44 46" />
-          <path d="M25 36 H39" />
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+          <path d="M32 5 L55 19 L55 45 L32 59 L9 45 L9 19 Z" />
+          <circle cx="32" cy="30" r="8" />
+          <path d="M24 42 L32 34 L40 42" />
         </svg>
         <span class="brand-name">{site.name}</span>
         <span class="brand-sub">{site.tagline}</span>
@@ -24,21 +24,27 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
       <nav class="nav" aria-label="Main">
         {nav.map((item) => <a href={url(item.href)} data-hash={item.hash}>{item.label}</a>)}
       </nav>
+
+      <span class="badge">{'AD—\n—IMA\nM1AMI'}</span>
     </div>
 
     <div class="rail-foot">
-      {site.address}<br />
-      <a href={`mailto:${site.email}`}>{site.email}</a><br />
-      {site.phone}
+      <a href={site.social.instagram} target="_blank" rel="noopener">
+        <Icon name="instagram" size={26} />
+      </a>
+      <a href={waLink} target="_blank" rel="noopener">
+        <Icon name="whatsapp" size={26} />
+      </a>
+      <a href={site.social.instagram} target="_blank" rel="noopener">@adima.design</a>
     </div>
   </aside>
 
   <main class="main">
     <section class="block" id="inicio">
-      <p class="eyebrow">Interior finishes · {site.address}</p>
-      <h1>Surfaces with depth, applied layer by layer.</h1>
-      <div class="intro" style="margin-top:2rem">
-        <p class="big">
+      <h1>Surfaces with depth, applied layer by layer</h1>
+
+      <div class="col">
+        <p class="lead">
           Adima Design creates decorative finishes for interiors: venetian plaster, microcement,
           limewash and epoxy. Residential and commercial spaces across South Florida.
         </p>
@@ -47,13 +53,10 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
           hand. The result is a seamless wall or floor with real depth — not a printed imitation of
           one.
         </p>
-        <div class="intro-links">
-          <a class="link-more" href={url('/#servicios')}>Services</a>
-          <a class="link-more" href={url('/#contacto')}>Request a quote</a>
+        <div class="more-row">
+          <a class="more" href={url('/#servicios')}>Services</a>
+          <a class="more" href={url('/#contacto')}>Request a quote</a>
         </div>
-        <p class="todo">
-          Demo content · photos, email and final contact details pending.
-        </p>
       </div>
 
       <figure class="media media-lg ratio-32">
@@ -62,55 +65,47 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
     </section>
 
     <section class="block" id="servicios">
-      <p class="eyebrow">Services</p>
-      <h2>Finishes that change how a room feels</h2>
-      <div class="services" style="margin-top:2.6rem">
+      <h2>Finishes</h2>
+
+      <div class="services">
         {services.map((s) => (
           <article class="service">
-            <div class="service-head">
-              <Icon name={s.icon} size={58} />
-              <span>{s.title}</span>
+            <div class="tile"><Icon name={s.icon} size={46} /></div>
+            <div>
+              <span class="service-label">{s.title}</span>
+              <span class="service-note">{s.items.join(' · ')}</span>
             </div>
-            <ul>
-              {s.items.map((item) => <li>{item}</li>)}
-            </ul>
           </article>
         ))}
       </div>
+
+      <p class="todo">Demo content · photos and final contact details pending.</p>
     </section>
 
     <section class="block" id="proyectos">
-      <p class="eyebrow">Projects</p>
       <h2>Recent work</h2>
-      <div class="projects" style="margin-top:2.6rem">
+
+      <div class="projects">
         {projects.map((p) => (
           <figure class="project">
             <div class={`media ${p.ratio}`}>
               <span class="media-tag">Photo pending</span>
             </div>
-            <figcaption>
-              <h3>{p.title}</h3>
-              <span class="meta">{p.type} · {p.meta}</span>
-            </figcaption>
+            <figcaption>({p.title} · {p.type})</figcaption>
           </figure>
         ))}
       </div>
-      <p class="todo">Gallery with real photos pending.</p>
     </section>
 
     <section class="block" id="estudio">
-      <p class="eyebrow">Studio</p>
-      <h2>A craft method, not a guess</h2>
+      <h2>Studio</h2>
 
-      <div class="study" style="margin-top:2.6rem">
-        <div class="study-text">
+      <div class="study">
+        <div class="col">
           {about.map((paragraph) => <p>{paragraph}</p>)}
           <div class="facts">
             {stats.map((s) => (
-              <div>
-                <strong>{s.value}</strong>
-                <span>{s.label}</span>
-              </div>
+              <div><strong>{s.value}</strong> · {s.label}</div>
             ))}
           </div>
         </div>
@@ -118,11 +113,11 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
         <div class="study-media">
           <figure>
             <div class="media ratio-43"><span class="media-tag">Application photo pending</span></div>
-            <figcaption>On-site application and sheen check</figcaption>
+            <figcaption>(On-site application · sheen check)</figcaption>
           </figure>
           <figure>
             <div class="media ratio-43"><span class="media-tag">Crew photo pending</span></div>
-            <figcaption>Our crew in {site.address}</figcaption>
+            <figcaption>(Our crew · {site.address})</figcaption>
           </figure>
         </div>
       </div>
@@ -139,10 +134,9 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
     </section>
 
     <section class="block" id="contacto">
-      <p class="eyebrow">Contact</p>
-      <h2>Tell us about your space</h2>
+      <h2>Contact</h2>
 
-      <div class="contact" style="margin-top:2.6rem">
+      <div class="contact">
         <div>
           <dl class="dl">
             <div><dt>Phone</dt><dd>{site.phone}</dd></div>
@@ -188,15 +182,15 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
   </main>
 
   <footer class="foot">
-    <span>© {new Date().getFullYear()} {site.name} · {site.tagline}</span>
+    <span>© {new Date().getFullYear()} {site.name}</span>
     <span class="social">
       <a href={site.social.instagram} target="_blank" rel="noopener">
-        <Icon name="instagram" size={26} />Instagram
+        <Icon name="instagram" size={22} />Instagram
       </a>
       <a href={waLink} target="_blank" rel="noopener">
-        <Icon name="whatsapp" size={26} />WhatsApp
+        <Icon name="whatsapp" size={22} />WhatsApp
       </a>
-      <a href={`mailto:${site.email}`}><Icon name="mail" size={26} />Email</a>
+      <a href={`mailto:${site.email}`}><Icon name="mail" size={22} />Email</a>
     </span>
   </footer>
 
