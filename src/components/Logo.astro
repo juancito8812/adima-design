@@ -1,0 +1,45 @@
+---
+// Monograma Adima Design: cubo (mármol) con las letras A y M en serifa.
+// Réplica vectorial del logotipo real de @adima.design.
+interface Props {
+  size?: number;
+  class?: string;
+}
+const { size = 68, class: cls = 'logo-mark' } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 72 72"
+  width={size}
+  height={size}
+  class={cls}
+  role="img"
+  aria-label="Adima Design"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="adima-left" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#f1ece4" />
+      <stop offset="1" stop-color="#ded5c6" />
+    </linearGradient>
+    <linearGradient id="adima-right" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0" stop-color="#fdfcfa" />
+      <stop offset="1" stop-color="#efeae1" />
+    </linearGradient>
+  </defs>
+
+  <!-- caras del cubo -->
+  <polygon points="10,22 34,30 34,58 10,50" fill="url(#adima-left)" stroke="#3d3d37" stroke-width="0.9" />
+  <polygon points="34,30 62,20 62,48 34,58" fill="url(#adima-right)" stroke="#3d3d37" stroke-width="0.9" />
+  <polygon points="10,22 38,12 62,20 34,30" fill="#ffffff" stroke="#3d3d37" stroke-width="0.9" />
+
+  <!-- letras, cada una sobre el plano de su cara -->
+  <g
+    fill="#121212"
+    font-family="'Didot','Bodoni MT','Playfair Display','Times New Roman','Liberation Serif',Georgia,serif"
+    font-weight="400"
+  >
+    <text x="0" y="0" font-size="22" text-anchor="middle" transform="translate(20.5,44) skewY(18.4)">A</text>
+    <text x="0" y="0" font-size="26" text-anchor="middle" transform="translate(46,45.5) skewY(-19.6)">M</text>
+  </g>
+</svg>
