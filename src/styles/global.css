@@ -66,6 +66,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- Marca ---------- */
 .brand { display: block; }
+.logo-mark { display: block; margin-bottom: 1rem; }
 .brand svg {
   width: 68px;
   height: 68px;

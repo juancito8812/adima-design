@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
+import Logo from '../components/Logo.astro';
 import { site, url, nav, stats, services, about, process, projects } from '../config';
 
 const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
@@ -12,11 +13,7 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
   <aside class="rail">
     <div>
       <a class="brand" href={url('/')}>
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
-          <path d="M32 5 L55 19 L55 45 L32 59 L9 45 L9 19 Z" />
-          <circle cx="32" cy="30" r="8" />
-          <path d="M24 42 L32 34 L40 42" />
-        </svg>
+        <Logo size={76} />
         <span class="brand-name">{site.name}</span>
         <span class="brand-sub">{site.tagline}</span>
       </a>
