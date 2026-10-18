@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
-  <rect width="72" height="72" fill="#ffffff"/>
-  <polygon points="10,22 34,30 34,58 10,50" fill="#efe9e0" stroke="#3d3d37" stroke-width="1.4" />
-  <polygon points="34,30 62,20 62,48 34,58" fill="#fbf9f5" stroke="#3d3d37" stroke-width="1.4" />
-  <polygon points="10,22 38,12 62,20 34,30" fill="#ffffff" stroke="#3d3d37" stroke-width="1.4" />
-  <g fill="#121212" font-family="'Didot','Bodoni MT','Times New Roman','Liberation Serif',Georgia,serif">
-    <text x="0" y="0" font-size="21" text-anchor="middle" transform="translate(20.5,44) skewY(18.4)">A</text>
-    <text x="0" y="0" font-size="25" text-anchor="middle" transform="translate(46,43.5) skewY(-19.6)">M</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#ffffff"/>
+  <g fill="none" stroke="#4c5c2a" stroke-width="1.6">
+    <path d="M32 11 L50 31 H14 Z"/>
+    <circle cx="32" cy="43" r="10"/>
+    <path d="M32 31 V21"/>
+    <path d="M8 55 H56"/>
   </g>
 </svg>
+
