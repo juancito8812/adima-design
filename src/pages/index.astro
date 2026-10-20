@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { site, url, nav, stats, services, about, process, portfolio, founder, distinction } from '../config';
+import { site, url, nav, stats, services, about, process, portfolio, founder, distinction, reviews, reviewsUrl } from '../config';
 
 const srcset = (slug: string) =>
   [480, 960, 1600].map((w) => `${url(`/portfolio/${slug}-${w}.webp`)} ${w}w`).join(', ');
@@ -215,6 +215,31 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
         ))}
       </div>
     </section>
+
+    {reviews.length > 0 && (
+      <section class="block" id="resenas">
+        <p class="eyebrow">Reviews</p>
+        <h2 data-reveal>In their words</h2>
+
+        <div class="reviews" style="margin-top:2.6rem" data-reveal>
+          {reviews.map((r) => (
+            <figure>
+              <blockquote>{r.quote}</blockquote>
+              <figcaption>
+                <span class="who">{r.name}</span>
+                <span class="meta">{r.detail}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        {reviewsUrl && (
+          <p class="reviews-link">
+            <a href={reviewsUrl} target="_blank" rel="noopener">See all reviews on Google</a>
+          </p>
+        )}
+      </section>
+    )}
 
     <section class="block" id="contacto">
       <p class="eyebrow">Contact</p>

@@ -41,6 +41,7 @@ export const nav = [
   { label: 'Services', href: '/#servicios', hash: 'servicios' },
   { label: 'Work', href: '/#proyectos', hash: 'proyectos' },
   { label: 'Studio', href: '/#estudio', hash: 'estudio' },
+  { label: 'Reviews', href: '/#resenas', hash: 'resenas' },
   { label: 'Contact', href: '/#contacto', hash: 'contacto' },
 ];
 
@@ -182,3 +183,32 @@ export const portfolioCategories = [
     text: 'Every project starts on a sample board: trowel texture, sheen and colour tested on the real surface before we commit to the whole wall.',
   },
 ];
+
+// ---------------------------------------------------------------- Reseñas
+// IMPORTANTE: solo reseñas reales, copiadas tal cual las escribió el cliente
+// (Google, WhatsApp, Instagram). No inventar ni "pulir" citas: Google penaliza
+// reseñas falsas y en EE. UU. la FTC multa testimonios inventados.
+// Deja el array vacío y la sección no se muestra.
+export const reviews = [
+  {
+    quote:
+      'PLACEHOLDER — pega aquí la reseña real, palabra por palabra. Las paredes quedaron con el efecto que buscábamos y el equipo mantuvo el local limpio todos los días.',
+    name: 'PLACEHOLDER NAME',
+    detail: 'Microcement walls · Doral, FL',
+  },
+  {
+    quote:
+      'PLACEHOLDER — pega aquí la reseña real, palabra por palabra. Nos enseñaron la muestra antes de empezar, así que no hubo sorpresas con el color ni el brillo.',
+    name: 'PLACEHOLDER NAME',
+    detail: 'Book-matched marble · Miami, FL',
+  },
+  {
+    quote:
+      'PLACEHOLDER — pega aquí la reseña real, palabra por palabra. Trabajaron fuera de horario para no parar la operación del negocio.',
+    name: 'PLACEHOLDER NAME',
+    detail: 'Reception & hall · Fort Lauderdale, FL',
+  },
+];
+
+// Opcional: link al perfil de Google Business para "ver todas las reseñas"
+export const reviewsUrl = '';
