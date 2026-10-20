@@ -1,0 +1,220 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, url } from '../config';
+
+const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
+  'Hi Adima Design, I would like to send a testimonial about my project.'
+)}`;
+---
+
+<Base
+  title={`Client testimonials — ${site.name}`}
+  description="Worked with Adima Design? Share your experience with our venetian plaster, microcement and marble-effect finishes in Miami, Doral and Fort Lauderdale."
+  active="testimonials"
+>
+  <aside class="rail">
+    <div>
+      <a class="brand" href={url('/')}>
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <rect x="4" y="4" width="56" height="56" stroke="#e4e4e4" />
+          <path d="M20 46 L32 18 L44 46" />
+          <path d="M25 36 H39" />
+        </svg>
+        <span class="brand-name">{site.name}</span>
+        <span class="brand-sub">{site.tagline}</span>
+      </a>
+
+      <nav class="nav" aria-label="Main">
+        <a href={url('/')}>Home</a>
+        <a href={url('/projects')}>Portfolio</a>
+        <a href={url('/#servicios')}>Services</a>
+        <a href={url('/#estudio')}>Studio</a>
+        <a href={url('/#testimonials')}>Testimonials</a>
+        <a href={url('/#contacto')}>Contact</a>
+      </nav>
+    </div>
+
+    <div class="rail-foot">
+      {site.street}<br />
+      {site.city}<br />
+      <a href={`mailto:${site.email}`}>{site.email}</a><br />
+      {site.phone}
+    </div>
+  </aside>
+
+  <main class="main" id="main" tabindex="-1">
+    <section class="block" id="testimonial-intro">
+      <p class="eyebrow">Client testimonials</p>
+      <h1>Tell us how the finish turned out.</h1>
+      <div class="intro" style="margin-top:2rem">
+        <p class="big">
+          Your words help the next client decide. Write it the way you would tell a friend — the
+          good and the pain points.
+        </p>
+        <p>
+          We read every testimonial and publish it as written: your name, your project and what you
+          say. We only shorten it if it is very long. Nothing is paid and nothing is rewritten.
+        </p>
+      </div>
+    </section>
+
+    <section class="block" id="testimonial-form-block">
+      <h2>Your testimonial</h2>
+
+      <form
+        id="testimonial-form"
+        novalidate
+        data-wa={site.social.whatsapp}
+        data-email={site.email}
+        style="margin-top:2rem"
+      >
+        <label class="field">
+          <span>Your name</span>
+          <input type="text" name="name" autocomplete="name" required minlength="2" aria-describedby="err-name" />
+          <span class="field-error" id="err-name" hidden>Please enter your name.</span>
+        </label>
+
+        <label class="field">
+          <span>Project and city <em>(optional)</em></span>
+          <input type="text" name="project" placeholder="Microcement walls, Doral FL" />
+        </label>
+
+        <fieldset class="field rating">
+          <legend>Your rating</legend>
+          <div class="stars">
+            {[5, 4, 3, 2, 1].map((n) => (
+              <label>
+                <input type="radio" name="rating" value={n} checked={n === 5} />
+                <span>{n}</span>
+              </label>
+            ))}
+          </div>
+          <span class="meta">5 is the best.</span>
+        </fieldset>
+
+        <label class="field">
+          <span>Your testimonial</span>
+          <textarea
+            name="quote"
+            rows="5"
+            required
+            minlength="20"
+            placeholder="What we did, how the process went, how it looks now…"
+            aria-describedby="err-quote"></textarea>
+          <span class="field-error" id="err-quote" hidden>Please write at least 20 characters.</span>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" name="consent" required aria-describedby="err-consent" />
+          <span>I allow {site.name} to publish this testimonial with my name on its website.</span>
+        </label>
+        <span class="field-error" id="err-consent" hidden>We need your permission to publish it.</span>
+
+        <input type="text" name="company" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+
+        <button class="submit" type="submit">Send testimonial</button>
+        <p class="form-alt">
+          Opens WhatsApp with your testimonial ready to send — or
+          <a href="#" id="email-fallback">send it by email</a>.
+        </p>
+        <p id="form-status" role="status" aria-live="polite" style="display:none"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>© {new Date().getFullYear()} {site.name} · {site.tagline}</span>
+    <span class="social">
+      <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>
+      <a href={waLink} target="_blank" rel="noopener">WhatsApp</a>
+    </span>
+  </footer>
+
+  <script>
+    const form = document.getElementById('testimonial-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status') as HTMLElement | null;
+    const emailFallback = document.getElementById('email-fallback') as HTMLAnchorElement | null;
+
+    const field = (name: string) =>
+      form?.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null;
+
+    const rating = () => {
+      const checked = form?.querySelector<HTMLInputElement>('input[name="rating"]:checked');
+      return checked?.value ?? '5';
+    };
+
+    const readForm = () => ({
+      name: field('name')?.value.trim() ?? '',
+      project: field('project')?.value.trim() ?? '',
+      quote: field('quote')?.value.trim() ?? '',
+      consent: Boolean((field('consent') as HTMLInputElement | null)?.checked),
+      trap: field('company')?.value.trim() ?? '',
+      stars: rating(),
+    });
+
+    const brief = () => {
+      const d = readForm();
+      return [
+        'New client testimonial — Adima Design',
+        '',
+        `Name: ${d.name}`,
+        d.project ? `Project: ${d.project}` : '',
+        `Rating: ${d.stars}/5`,
+        '',
+        `"${d.quote}"`,
+        '',
+        'Permission to publish with name: yes',
+      ]
+        .filter((line) => line !== '')
+        .join('\n');
+    };
+
+    const validate = () => {
+      const d = readForm();
+      const checks: Array<[string, boolean]> = [
+        ['name', d.name.length >= 2],
+        ['quote', d.quote.length >= 20],
+        ['consent', d.consent],
+      ];
+      let ok = true;
+      checks.forEach(([key, valid]) => {
+        const error = document.getElementById(`err-${key}`);
+        const input = field(key);
+        if (error) error.hidden = valid;
+        if (input) input.setAttribute('aria-invalid', valid ? 'false' : 'true');
+        if (!valid) ok = false;
+      });
+      return ok;
+    };
+
+    const showStatus = (text: string) => {
+      if (!status) return;
+      status.style.display = 'block';
+      status.textContent = text;
+    };
+
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (readForm().trap) return;
+      if (!validate()) {
+        showStatus('Please complete the highlighted fields.');
+        return;
+      }
+      const base = (form.dataset.wa ?? '').split('?')[0];
+      window.open(`${base}?text=${encodeURIComponent(brief())}`, '_blank', 'noopener');
+      showStatus('WhatsApp is opening with your testimonial — just press send.');
+    });
+
+    emailFallback?.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (!validate()) {
+        showStatus('Please complete the highlighted fields.');
+        return;
+      }
+      const email = form?.dataset.email ?? '';
+      const subject = `Client testimonial — ${readForm().name}`;
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief())}`;
+      showStatus('Your email app is opening with the testimonial ready to send.');
+    });
+  </script>
+</Base>

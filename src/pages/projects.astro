@@ -1,0 +1,371 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site, url, portfolio, portfolioCategories } from '../config';
+
+const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
+  'Hi Adima Design, I saw your portfolio and would like a quote.'
+)}`;
+
+const srcset = (slug: string) =>
+  [480, 960, 1600].map((w) => `${url(`/portfolio/${slug}-${w}.webp`)} ${w}w`).join(', ');
+
+const filters = [{ id: 'all', label: 'All work' }, ...portfolioCategories.map((c) => ({ id: c.id, label: c.label }))];
+const hero = portfolio[0];
+---
+
+<Base
+  title={`Portfolio — ${site.name}`}
+  description="Selected Adima Design projects: venetian plaster, microcement, marble-effect finishes and epoxy floors for homes and businesses in Miami, Doral, Fort Lauderdale and Hialeah."
+  active="portfolio"
+>
+  <aside class="rail">
+    <div>
+      <a class="brand" href={url('/')}>
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+          <rect x="4" y="4" width="56" height="56" stroke="#e4e4e4" />
+          <path d="M20 46 L32 18 L44 46" />
+          <path d="M25 36 H39" />
+        </svg>
+        <span class="brand-name">{site.name}</span>
+        <span class="brand-sub">{site.tagline}</span>
+      </a>
+
+      <nav class="nav" aria-label="Main">
+        <a href={url('/')}>Home</a>
+        <a href={url('/projects')} aria-current="true">Portfolio</a>
+        <a href={url('/#servicios')}>Services</a>
+        <a href={url('/#estudio')}>Studio</a>
+        <a href={url('/#testimonials')}>Testimonials</a>
+        <a href={url('/#contacto')}>Contact</a>
+      </nav>
+    </div>
+
+    <div class="rail-foot">
+      {site.street}<br />
+      {site.city}<br />
+      <a href={`mailto:${site.email}`}>{site.email}</a><br />
+      {site.phone}
+    </div>
+  </aside>
+
+  <main class="main" id="main" tabindex="-1">
+    <section class="block" id="portafolio-intro">
+      <p class="eyebrow">Portfolio · {portfolio.length} projects</p>
+      <h1>Work applied by hand, room after room.</h1>
+      <div class="intro" style="margin-top:2rem">
+        <p class="big">
+          At Adima Design we specialize in creating captivating environments for your home or
+          business: venetian plaster, microcement, marble-effect finishes, wood panels and epoxy
+          resin.
+        </p>
+        <p>
+          Every image below is a finished job — or the wall mid-application. Commercial spaces in
+          Doral, homes in Fort Lauderdale and Miami, renovations in Hialeah. No renderings, no
+          stock photos.
+        </p>
+      </div>
+    </section>
+
+    <figure class="hero-shot">
+      <img
+        src={url(`/portfolio/${hero.slug}-1600.webp`)}
+        srcset={srcset(hero.slug)}
+        sizes="(max-width: 980px) 100vw, 78vw"
+        width={hero.w}
+        height={hero.h}
+        alt={`${hero.title} — ${hero.finish}`}
+        loading="eager"
+        decoding="async"
+      />
+      <figcaption>
+        <strong>{hero.title}</strong>
+        <span>{hero.finish} · {hero.place}</span>
+      </figcaption>
+    </figure>
+
+    <section class="block" id="galeria">
+      <div class="gal-head">
+        <h2 class="eyebrow" style="margin:0">Gallery</h2>
+        <div class="filters" role="tablist" aria-label="Filter projects">
+          {filters.map((f, i) => (
+            <button type="button" role="tab" data-filter={f.id} aria-selected={i === 0 ? 'true' : 'false'}>
+              {f.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="grid" id="gallery-grid">
+        {portfolio.slice(1).map((shot, i) => (
+          <figure class="shot" data-cat={shot.cat} data-index={i}>
+            <button
+              class="shot-btn"
+              type="button"
+              aria-label={`Open ${shot.title}`}
+              data-full={url(`/portfolio/${shot.slug}-1600.webp`)}
+              data-title={shot.title}
+              data-meta={`${shot.finish} · ${shot.place}`}
+            >
+              <img
+                src={url(`/portfolio/${shot.slug}-960.webp`)}
+                srcset={srcset(shot.slug)}
+                sizes="(max-width: 640px) 92vw, (max-width: 1200px) 45vw, 30vw"
+                width={shot.w}
+                height={shot.h}
+                alt={`${shot.title} — ${shot.finish}, ${shot.place}`}
+                loading={i < 3 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </button>
+            <figcaption>
+              <h3>{shot.title}</h3>
+              <span class="meta">{shot.finish} · {shot.place}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="block" id="categorias">
+      <p class="eyebrow">What we do</p>
+      <h2>Where each finish belongs</h2>
+      <div class="cats">
+        {portfolioCategories.map((c) => (
+          <article>
+            <h3>{c.title}</h3>
+            <p>{c.text}</p>
+            <button class="link-more cat-jump" type="button" data-jump={c.id}>{c.label}</button>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="block" id="cta">
+      <p class="eyebrow">Next step</p>
+      <h2>See a finish on your own wall</h2>
+      <p class="intro" style="margin-top:1.4rem">
+        Send us a photo of the space and we will bring sample boards of the finishes that suit it.
+      </p>
+      <div class="intro-links" style="margin-top:1.8rem">
+        <a class="link-more" href={url('/#contacto')}>Request a quote</a>
+        <a class="link-more" href={waLink} target="_blank" rel="noopener">WhatsApp</a>
+        <a class="link-more" href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>© {new Date().getFullYear()} {site.name} · {site.tagline}</span>
+    <span class="social">
+      <a href={site.social.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={26} />Instagram</a>
+      <a href={waLink} target="_blank" rel="noopener"><Icon name="whatsapp" size={26} />WhatsApp</a>
+      <a href={`mailto:${site.email}`}><Icon name="mail" size={26} />Email</a>
+    </span>
+  </footer>
+
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Project photo">
+    <button class="lb-close" type="button" aria-label="Close">&times;</button>
+    <button class="lb-nav lb-prev" type="button" aria-label="Previous">&#8592;</button>
+    <button class="lb-nav lb-next" type="button" aria-label="Next">&#8594;</button>
+    <figure>
+      <img id="lb-img" src="" alt="" />
+      <figcaption>
+        <strong id="lb-title"></strong>
+        <span id="lb-meta"></span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <script>
+    const grid = document.getElementById('gallery-grid') as HTMLElement | null;
+    const shots = Array.from(document.querySelectorAll<HTMLElement>('.shot'));
+
+    // ---- Filters -------------------------------------------------------
+    const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('.filters button'));
+    const applyFilter = (id: string) => {
+      chips.forEach((c) => c.setAttribute('aria-selected', String(c.dataset.filter === id)));
+      shots.forEach((s) => {
+        const show = id === 'all' || s.dataset.cat === id;
+        s.hidden = !show;
+      });
+    };
+    chips.forEach((chip) => chip.addEventListener('click', () => applyFilter(chip.dataset.filter ?? 'all')));
+    document.querySelectorAll<HTMLButtonElement>('.cat-jump').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        applyFilter(btn.dataset.jump ?? 'all');
+        grid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      })
+    );
+
+    // ---- Lightbox ------------------------------------------------------
+    const lb = document.getElementById('lightbox') as HTMLElement | null;
+    const lbImg = document.getElementById('lb-img') as HTMLImageElement | null;
+    const lbTitle = document.getElementById('lb-title');
+    const lbMeta = document.getElementById('lb-meta');
+    let current = 0;
+
+    const visible = () => shots.filter((s) => !s.hidden);
+
+    const show = (index: number) => {
+      const list = visible();
+      if (!list.length) return;
+      current = (index + list.length) % list.length;
+      const shot = list[current];
+      const btn = shot.querySelector<HTMLButtonElement>('.shot-btn');
+      if (!btn || !lbImg) return;
+      lbImg.src = btn.dataset.full ?? '';
+      lbImg.alt = btn.querySelector('img')?.alt ?? '';
+      if (lbTitle) lbTitle.textContent = btn.dataset.title ?? '';
+      if (lbMeta) lbMeta.textContent = btn.dataset.meta ?? '';
+      if (lb) lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+    };
+
+    const close = () => {
+      if (lb) lb.hidden = true;
+      document.body.style.overflow = '';
+    };
+
+    document.querySelectorAll<HTMLButtonElement>('.shot-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const shot = btn.closest<HTMLElement>('.shot');
+        const list = visible();
+        show(shot ? list.indexOf(shot) : 0);
+      });
+    });
+
+    document.querySelector('.lb-close')?.addEventListener('click', close);
+    document.querySelector('.lb-prev')?.addEventListener('click', () => show(current - 1));
+    document.querySelector('.lb-next')?.addEventListener('click', () => show(current + 1));
+    lb?.addEventListener('click', (event) => {
+      if (event.target === lb) close();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (!lb || lb.hidden) return;
+      if (event.key === 'Escape') close();
+      if (event.key === 'ArrowLeft') show(current - 1);
+      if (event.key === 'ArrowRight') show(current + 1);
+    });
+
+    // ---- Swipe ---------------------------------------------------------
+    let startX = 0;
+    lb?.addEventListener('touchstart', (event) => {
+      startX = event.touches[0].clientX;
+    }, { passive: true });
+    lb?.addEventListener('touchend', (event) => {
+      const dx = event.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+    });
+  </script>
+</Base>
+
+<style>
+  .hero-shot { margin: 2.6rem 0 3.4rem; }
+  .hero-shot img { display: block; width: 100%; height: auto; }
+  .hero-shot figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1rem;
+    align-items: baseline;
+    margin-top: 0.7rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .hero-shot strong { font-weight: 500; color: var(--ink); }
+
+  .gal-head {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1rem;
+    margin-bottom: 2.4rem;
+  }
+  .filters { display: flex; flex-wrap: wrap; gap: 0 1.1rem; margin-top: 1rem; }
+  .filters button {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.75rem;
+    letter-spacing: var(--track);
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 0.65rem 0;
+    min-height: 44px;
+  }
+  .filters button[aria-selected='true'] { color: var(--ink); border-bottom: 1px solid var(--ink); }
+  .filters button:hover { color: var(--ink); }
+
+  .grid { columns: 3; column-gap: 1.4rem; }
+  @media (max-width: 1100px) { .grid { columns: 2; } }
+  @media (max-width: 640px) { .grid { columns: 1; } }
+
+  .shot { break-inside: avoid; margin: 0 0 0.4rem; }
+  .shot[hidden] { display: none; }
+  .shot-btn {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    overflow: hidden;
+    width: 100%;
+  }
+  .shot-btn img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.7s ease, filter 0.4s ease;
+  }
+  .shot-btn:hover img { transform: scale(1.025); filter: brightness(1.03); }
+  .shot figcaption { margin: 0.6rem 0 1.5rem; }
+  .shot .meta { font-size: 0.75rem; color: #6b6459; }
+  .shot h3 { margin: 0; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.06em; }
+  .shot .meta {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2.6rem 1.6rem; margin-top: 2.4rem; align-items: start; }
+  .cats article { border-top: 1px solid var(--line); padding-top: 1rem; display: flex; flex-direction: column; height: 100%; }
+  .cats article p { flex: 1 1 auto; }
+  .cats h3 { font-size: 0.74rem; }
+  .cats p { font-size: 0.8rem; color: var(--ink-soft); }
+  .cat-jump { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; font-size: 0.75rem; }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(12, 12, 11, 0.96);
+    display: grid;
+    place-items: center;
+    padding: 3.2rem 3.6rem;
+  }
+  .lightbox[hidden] { display: none; }
+  .lightbox figure { margin: 0; max-width: 100%; max-height: 100%; display: grid; gap: 0.8rem; justify-items: center; }
+  .lightbox img { max-width: 100%; max-height: 78vh; width: auto; height: auto; display: block; }
+  .lightbox figcaption { color: #e8e6e1; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; }
+  .lightbox figcaption span { display: block; color: #9b968c; margin-top: 0.2rem; }
+  .lb-close, .lb-nav {
+    position: absolute;
+    background: none;
+    border: 0;
+    color: #e8e6e1;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.8rem;
+  }
+  .lb-close { top: 0.6rem; right: 0.8rem; font-size: 2rem; }
+  .lb-prev { left: 0.2rem; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 0.2rem; top: 50%; transform: translateY(-50%); }
+  .lb-close:hover, .lb-nav:hover { color: #fff; }
+</style>
