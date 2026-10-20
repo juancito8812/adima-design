@@ -1,7 +1,22 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { site, url, nav, stats, services, about, process, projects } from '../config';
+import { site, url, nav, stats, services, about, process, portfolio } from '../config';
+
+const srcset = (slug: string) =>
+  [480, 960, 1600].map((w) => `${url(`/portfolio/${slug}-${w}.webp`)} ${w}w`).join(', ');
+
+const bySlug = (slug: string) => portfolio.find((p) => p.slug === slug)!;
+const featured = [
+  'univista-lobby',
+  'pool-fire-feature',
+  'marble-bathroom',
+  'marble-hallway',
+  'epoxy-living-room',
+  'univista-reception',
+].map(bySlug);
+const heroShot = bySlug('univista-lobby');
+const studyShots = [bySlug('brand-cube'), bySlug('univista-application')];
 
 const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
   'Hi Adima Design, I would like a quote for a project.'
@@ -22,7 +37,9 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
       </a>
 
       <nav class="nav" aria-label="Main">
-        {nav.map((item) => <a href={url(item.href)} data-hash={item.hash}>{item.label}</a>)}
+        {nav.slice(0, 3).map((item) => <a href={url(item.href)} data-hash={item.hash}>{item.label}</a>)}
+        <a href={url('/projects')}>Portfolio</a>
+        {nav.slice(3).map((item) => <a href={url(item.href)} data-hash={item.hash}>{item.label}</a>)}
       </nav>
     </div>
 
@@ -51,13 +68,20 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
           <a class="link-more" href={url('/#servicios')}>Services</a>
           <a class="link-more" href={url('/#contacto')}>Request a quote</a>
         </div>
-        <p class="todo">
-          Demo content · photos, email and final contact details pending.
-        </p>
       </div>
 
-      <figure class="media media-lg ratio-32">
-        <figcaption class="media-tag">Main image pending</figcaption>
+      <figure class="hero-media">
+        <img
+          src={url(`/portfolio/${heroShot.slug}-1600.webp`)}
+          srcset={srcset(heroShot.slug)}
+          sizes="(max-width: 980px) 100vw, 78vw"
+          width={heroShot.w}
+          height={heroShot.h}
+          alt={`${heroShot.title} — ${heroShot.finish}, ${heroShot.place}`}
+          loading="eager"
+          decoding="async"
+        />
+        <figcaption>{heroShot.title} · {heroShot.finish} · {heroShot.place}</figcaption>
       </figure>
     </section>
 
@@ -83,19 +107,30 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
       <p class="eyebrow">Projects</p>
       <h2>Recent work</h2>
       <div class="projects" style="margin-top:2.6rem">
-        {projects.map((p) => (
-          <figure class="project">
-            <div class={`media ${p.ratio}`}>
-              <span class="media-tag">Photo pending</span>
-            </div>
-            <figcaption>
-              <h3>{p.title}</h3>
-              <span class="meta">{p.type} · {p.meta}</span>
-            </figcaption>
-          </figure>
+        {featured.map((p) => (
+          <a class="project" href={url('/projects')}>
+            <figure>
+              <figcaption>
+                <h3>{p.title}</h3>
+                <span class="meta">{p.finish} · {p.place}</span>
+              </figcaption>
+              <img
+                src={url(`/portfolio/${p.slug}-960.webp`)}
+                srcset={srcset(p.slug)}
+                sizes="(max-width: 560px) 92vw, (max-width: 900px) 45vw, 30vw"
+                width={p.w}
+                height={p.h}
+                alt={`${p.title} — ${p.finish}, ${p.place}`}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </a>
         ))}
       </div>
-      <p class="todo">Gallery with real photos pending.</p>
+      <div class="intro-links" style="margin-top:2.4rem">
+        <a class="link-more" href={url('/projects')}>Full portfolio · {portfolio.length} projects</a>
+      </div>
     </section>
 
     <section class="block" id="estudio">
@@ -117,12 +152,30 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
 
         <div class="study-media">
           <figure>
-            <div class="media ratio-43"><span class="media-tag">Application photo pending</span></div>
+            <img
+              src={url(`/portfolio/${studyShots[1].slug}-960.webp`)}
+              srcset={srcset(studyShots[1].slug)}
+              sizes="(max-width: 980px) 92vw, 42vw"
+              width={studyShots[1].w}
+              height={studyShots[1].h}
+              alt={`${studyShots[1].title} — ${studyShots[1].finish}`}
+              loading="lazy"
+              decoding="async"
+            />
             <figcaption>On-site application and sheen check</figcaption>
           </figure>
           <figure>
-            <div class="media ratio-43"><span class="media-tag">Crew photo pending</span></div>
-            <figcaption>Our crew in {site.address}</figcaption>
+            <img
+              src={url(`/portfolio/${studyShots[0].slug}-960.webp`)}
+              srcset={srcset(studyShots[0].slug)}
+              sizes="(max-width: 980px) 92vw, 42vw"
+              width={studyShots[0].w}
+              height={studyShots[0].h}
+              alt={`${studyShots[0].title} — ${studyShots[0].finish}`}
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Finish sample before the job starts</figcaption>
           </figure>
         </div>
       </div>
@@ -151,7 +204,6 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
             <div><dt>Location</dt><dd>{site.address}</dd></div>
             <div><dt>Hours</dt><dd>{site.hours}</dd></div>
           </dl>
-          <p class="todo">Email, street address and hours still to be confirmed by the client.</p>
         </div>
 
         <form id="contact-form" novalidate>
