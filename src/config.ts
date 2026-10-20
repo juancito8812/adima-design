@@ -5,7 +5,7 @@
  * Real data recovered from the client's Instagram profile (@adima.design, 2026-10-17):
  * name "Adima Design LLC", bio "Interior Design, Venetian Plaster, Microcement and Epoxy",
  * phone (786) 727-7419 (Miami-Dade area code), 50 published posts, bilingual account.
- * Still unconfirmed: email, exact address, business hours, project photos and metrics.
+ * Still unconfirmed: exact address, business hours, project photos and metrics.
  */
 
 export const BASE = import.meta.env.BASE_URL.endsWith('/')
@@ -20,8 +20,7 @@ export const site = {
   tagline: 'Interior design · Plastering · Decoration',
   description:
     'Adima Design LLC — Miami-based studio specialized in venetian plaster, microcement, limewash and epoxy finishes for residential and commercial interiors.',
-  // PLACEHOLDER: no email published yet
-  email: 'hello@adimadesign.com',
+  email: 'adimadesign2024@gmail.com',
   phone: '+1 (786) 727-7419',
   whatsapp: '17867277419',
   // PLACEHOLDER: area code 786 is Miami-Dade, FL — confirm the exact address
