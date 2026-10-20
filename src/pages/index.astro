@@ -217,8 +217,8 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
     </section>
 
     {reviews.length > 0 && (
-      <section class="block" id="resenas">
-        <p class="eyebrow">Reviews</p>
+      <section class="block" id="testimonials">
+        <p class="eyebrow">Client testimonials</p>
         <h2 data-reveal>In their words</h2>
 
         <div class="reviews" style="margin-top:2.6rem" data-reveal>
@@ -233,11 +233,15 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
           ))}
         </div>
 
-        {reviewsUrl && (
-          <p class="reviews-link">
-            <a href={reviewsUrl} target="_blank" rel="noopener">See all reviews on Google</a>
-          </p>
-        )}
+        <p class="reviews-link">
+          <a href={url('/testimonials')}>Worked with us? Leave your testimonial →</a>
+          {reviewsUrl && (
+            <>
+              {' · '}
+              <a href={reviewsUrl} target="_blank" rel="noopener">See all reviews on Google</a>
+            </>
+          )}
+        </p>
       </section>
     )}
 

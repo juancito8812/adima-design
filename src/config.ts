@@ -41,7 +41,7 @@ export const nav = [
   { label: 'Services', href: '/#servicios', hash: 'servicios' },
   { label: 'Work', href: '/#proyectos', hash: 'proyectos' },
   { label: 'Studio', href: '/#estudio', hash: 'estudio' },
-  { label: 'Reviews', href: '/#resenas', hash: 'resenas' },
+  { label: 'Testimonials', href: '/#testimonials', hash: 'testimonials' },
   { label: 'Contact', href: '/#contacto', hash: 'contacto' },
 ];
 

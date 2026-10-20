@@ -429,6 +429,7 @@ input, textarea, select {
 select { text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.72rem; }
 input:focus-visible, textarea:focus-visible, select:focus-visible { border-bottom-color: var(--ink); }
 input:user-invalid, textarea:user-invalid { border-bottom-color: #b4341f; }
+.field-error[hidden] { display: none; }
 .field-error {
   display: block;
   margin-top: 0.35rem;
@@ -548,3 +549,42 @@ textarea { resize: vertical; }
   color: var(--ink-soft);
 }
 .reviews-link { margin-top: 1.6rem; font-size: 0.8125rem; }
+
+/* ---------- Formulario de testimonios ---------- */
+.field.rating { border: 0; padding: 0; margin: 0; }
+.field.rating legend { font-size: 0.8125rem; color: var(--ink-soft); padding: 0; margin-bottom: 0.5rem; }
+.stars { display: flex; gap: 0.4rem; }
+.stars label { cursor: pointer; }
+.stars input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.stars span {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid var(--line);
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.stars input:checked + span { border-color: var(--ink); color: var(--ink); }
+.stars input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 2px; }
+.field .meta { font-size: 0.75rem; color: var(--ink-soft); }
+.check { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.875rem; line-height: 1.5; margin-bottom: 0.4rem; }
+.check input {
+  appearance: auto;
+  accent-color: var(--ink);
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 0;
+  flex: 0 0 auto;
+  margin-top: 0.15rem;
+}
+.check span {
+  display: block;
+  min-width: 0;
+  font-size: 0.875rem;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--ink);
+  margin: 0;
+}
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
