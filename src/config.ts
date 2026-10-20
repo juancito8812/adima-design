@@ -17,7 +17,7 @@ export const url = (path = '/') => `${BASE}${path.replace(/^\//, '')}`;
 
 export const site = {
   name: 'Adima Design LLC',
-  tagline: 'Decorative interior finishes',
+  tagline: 'Interior design · Plastering · Decoration',
   description:
     'Adima Design LLC — Miami-based studio specialized in venetian plaster, microcement, limewash and epoxy finishes for residential and commercial interiors.',
   // PLACEHOLDER: no email published yet
