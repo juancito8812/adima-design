@@ -261,8 +261,20 @@ p { margin: 0 0 1.1rem; }
 @media (max-width: 900px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .projects { grid-template-columns: 1fr; } }
 .project { margin: 0; display: block; color: inherit; }
-.project figure { margin: 0; }
-.project img { display: block; width: 100%; height: auto; transition: filter 0.5s ease; }
+.project figure { margin: 0; display: flex; flex-direction: column; }
+/* Tarjetas uniformes: mismo recorte y misma altura de pie de foto, asi las
+   imagenes de una fila arrancan y terminan a la misma altura. */
+.project img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: filter 0.5s ease;
+}
+@media (min-width: 901px) {
+  .project figcaption { min-height: 3.75rem; }
+}
 .project:hover img { filter: brightness(0.96); }
 .project figcaption { margin: 0 0 0.6rem; }
 .project figcaption h3 { margin: 0; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.06em; text-transform: none; }
@@ -285,16 +297,6 @@ p { margin: 0 0 1.1rem; }
   color: var(--accent);
 }
 .study-media img { display: block; width: 100%; height: auto; }
-.project figcaption { margin-top: 0.7rem; }
-.project h3 { margin: 0; }
-.project .meta {
-  display: block;
-  margin-top: 0.2rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
 
 /* ---------- Estudio ---------- */
 .study { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3rem; }
