@@ -153,6 +153,20 @@ p { margin: 0 0 1.1rem; }
 }
 .rail-foot a:hover { color: var(--accent); }
 
+/* The email is long: uppercase + wide tracking pushed it past the 250px rail
+   and it painted over the portfolio images. Keep it in mixed case and let it wrap. */
+.rail-foot {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.rail-foot a {
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: 0.8125rem;
+  display: inline-block;
+  max-width: 100%;
+}
+
 @media (max-width: 980px) {
   .nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; margin: 1.4rem 0 0; }
 }
