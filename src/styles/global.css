@@ -1,20 +1,46 @@
 :root {
   --bg: #ffffff;
   --ink: #2f2f2f;
-  --ink-soft: #9a9a9a;
+  --ink-soft: #757575;   /* AA on white (4.6:1); the previous #9a9a9a was 2.8:1 */
   --accent: #6f6a63;
   --line: #e4e4e4;
   --placeholder-bg: #f4f4f2;
   --rail: 250px;
   --font: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --track: 0.16em;
+  --focus: #1b1b1b;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 *,
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+/* Skip link: first tab stop, hidden until focused. */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  color: var(--ink);
+  padding: 0.75rem 1.1rem;
+  border: 1px solid var(--ink);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+}
+.skip:focus { left: 1rem; top: 1rem; }
+
+/* Visible keyboard focus everywhere (inputs previously removed the outline). */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
 
 body {
   margin: 0;
@@ -29,6 +55,14 @@ body {
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
+
+/* Scroll reveal — only when JS is on, so no-JS visitors never see blanks. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
 
 h1, h2, h3 {
   font-weight: 700;
@@ -377,8 +411,29 @@ input, textarea, select {
   appearance: none;
 }
 select { text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.72rem; }
-input:focus, textarea:focus, select:focus { outline: none; border-bottom-color: var(--accent); }
+input:focus-visible, textarea:focus-visible, select:focus-visible { border-bottom-color: var(--ink); }
+input:user-invalid, textarea:user-invalid { border-bottom-color: #b4341f; }
+.field-error {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b4341f;
+}
 textarea { resize: vertical; }
+
+.form-alt {
+  margin: 0.9rem 0 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+.form-alt a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--ink);
+}
 
 .submit {
   justify-self: start;
@@ -428,4 +483,5 @@ textarea { resize: vertical; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; }
+  .js [data-reveal] { opacity: 1 !important; transform: none !important; }
 }

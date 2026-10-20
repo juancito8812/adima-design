@@ -50,11 +50,11 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
     </div>
   </aside>
 
-  <main class="main">
+  <main class="main" id="main" tabindex="-1">
     <section class="block" id="inicio">
       <p class="eyebrow">Interior finishes · {site.address}</p>
       <h1>Surfaces with depth, applied layer by layer.</h1>
-      <div class="intro" style="margin-top:2rem">
+      <div class="intro" style="margin-top:2rem" data-reveal>
         <p class="big">
           Adima Design creates captivating environments for your home or business: Venetian
           plaster, microcement, Marmorino and epoxy resin. Residential, commercial and renovation
@@ -71,7 +71,7 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
         </div>
       </div>
 
-      <figure class="hero-media">
+      <figure class="hero-media" data-reveal>
         <img
           src={url(`/portfolio/${heroShot.slug}-1600.webp`)}
           srcset={srcset(heroShot.slug)}
@@ -80,6 +80,7 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
           height={heroShot.h}
           alt={`${heroShot.title} — ${heroShot.finish}, ${heroShot.place}`}
           loading="eager"
+          fetchpriority="high"
           decoding="async"
         />
         <figcaption>{heroShot.title} · {heroShot.finish} · {heroShot.place}</figcaption>
@@ -88,8 +89,8 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
 
     <section class="block" id="servicios">
       <p class="eyebrow">Services</p>
-      <h2>Finishes that change how a room feels</h2>
-      <div class="services" style="margin-top:2.6rem">
+      <h2 data-reveal>Finishes that change how a room feels</h2>
+      <div class="services" style="margin-top:2.6rem" data-reveal>
         {services.map((s) => (
           <article class="service">
             <div class="service-head">
@@ -103,7 +104,7 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
         ))}
       </div>
 
-      <div class="distinction">
+      <div class="distinction" data-reveal>
         <div class="distinction-head">
           <p class="eyebrow">{distinction.eyebrow}</p>
           <h3>{distinction.title}</h3>
@@ -124,8 +125,8 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
 
     <section class="block" id="proyectos">
       <p class="eyebrow">Projects</p>
-      <h2>Recent work</h2>
-      <div class="projects" style="margin-top:2.6rem">
+      <h2 data-reveal>Recent work</h2>
+      <div class="projects" style="margin-top:2.6rem" data-reveal>
         {featured.map((p) => (
           <a class="project" href={url('/projects')}>
             <figure>
@@ -154,9 +155,9 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
 
     <section class="block" id="estudio">
       <p class="eyebrow">Studio</p>
-      <h2>A craft method, not a guess</h2>
+      <h2 data-reveal>A craft method, not a guess</h2>
 
-      <div class="study" style="margin-top:2.6rem">
+      <div class="study" style="margin-top:2.6rem" data-reveal>
         <div class="study-text">
           {about.map((paragraph) => <p>{paragraph}</p>)}
           <div class="facts">
@@ -203,7 +204,7 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
         </div>
       </div>
 
-      <div class="process">
+      <div class="process" data-reveal>
         {process.map((p) => (
           <div>
             <b>{p.step}</b>
@@ -216,12 +217,12 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
 
     <section class="block" id="contacto">
       <p class="eyebrow">Contact</p>
-      <h2>Tell us about your space</h2>
+      <h2 data-reveal>Tell us about your space</h2>
 
-      <div class="contact" style="margin-top:2.6rem">
+      <div class="contact" style="margin-top:2.6rem" data-reveal>
         <div>
           <dl class="dl">
-            <div><dt>Phone</dt><dd>{site.phone}</dd></div>
+            <div><dt>Phone</dt><dd><a href={`tel:+${site.whatsapp}`}>{site.phone}</a></dd></div>
             <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
             <div><dt>Instagram</dt><dd><a href={site.social.instagram} target="_blank" rel="noopener">@adima.design</a></dd></div>
             <div><dt>Location</dt><dd>{site.address}</dd></div>
@@ -229,18 +230,20 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
           </dl>
         </div>
 
-        <form id="contact-form" novalidate>
+        <form id="contact-form" novalidate data-wa={site.social.whatsapp} data-email={site.email}>
           <label class="field">
             <span>Full name</span>
-            <input type="text" name="nombre" autocomplete="name" required />
+            <input type="text" name="name" autocomplete="name" required minlength="2" aria-describedby="err-name" />
+            <span class="field-error" id="err-name" hidden>Please enter your name.</span>
           </label>
           <label class="field">
             <span>Phone or email</span>
-            <input type="text" name="contacto" autocomplete="tel" required />
+            <input type="text" name="contact" autocomplete="tel" required minlength="5" aria-describedby="err-contact" />
+            <span class="field-error" id="err-contact" hidden>Add a phone or email so we can reply.</span>
           </label>
           <label class="field">
             <span>Project type</span>
-            <select name="tipo">
+            <select name="type">
               <option value="">Select an option</option>
               <option>Venetian plaster</option>
               <option>Microcement</option>
@@ -253,10 +256,13 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
           </label>
           <label class="field">
             <span>Project details</span>
-            <textarea name="mensaje" rows="4"></textarea>
+            <textarea name="message" rows="4" placeholder="Room, approximate square footage, timing…"></textarea>
           </label>
           <button class="submit" type="submit">Send request</button>
-          <p id="form-status" class="todo" style="display:none"></p>
+          <p class="form-alt">
+            Opens WhatsApp with your details already written — or <a href="#" id="email-fallback">send it by email</a>.
+          </p>
+          <p id="form-status" role="status" aria-live="polite" style="display:none"></p>
         </form>
       </div>
     </section>
@@ -274,6 +280,31 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
       <a href={`mailto:${site.email}`}><Icon name="mail" size={26} />Email</a>
     </span>
   </footer>
+
+  <script>
+    document.documentElement.classList.add('js');
+
+    // Reveal on scroll, staggered per group. Skipped when the user prefers less motion.
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealables = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    if (!reduce && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target as HTMLElement;
+            el.style.transitionDelay = `${(el.dataset.delay ?? '0')}ms`;
+            el.classList.add('is-in');
+            io.unobserve(el);
+          });
+        },
+        { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
+      );
+      revealables.forEach((el) => io.observe(el));
+    } else {
+      revealables.forEach((el) => el.classList.add('is-in'));
+    }
+  </script>
 
   <script>
     // Menu: highlights the visible section (same behaviour as the reference site).
@@ -302,15 +333,78 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
       sections.forEach((section) => observer.observe(section));
     }
 
-    // Demo form: no backend configured yet.
+    // Contact form: no backend needed — the filled-in brief goes straight to WhatsApp or email.
     const form = document.getElementById('contact-form') as HTMLFormElement | null;
     const status = document.getElementById('form-status') as HTMLElement | null;
-    form?.addEventListener('submit', (event) => {
-      event.preventDefault();
+    const emailFallback = document.getElementById('email-fallback') as HTMLAnchorElement | null;
+
+    const field = (name: string) => form?.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null;
+
+    const readForm = () => ({
+      name: field('name')?.value.trim() ?? '',
+      contact: field('contact')?.value.trim() ?? '',
+      type: field('type')?.value ?? '',
+      message: field('message')?.value.trim() ?? '',
+    });
+
+    const brief = () => {
+      const data = readForm();
+      const lines = [
+        `New project request — ${document.title.split('—')[0].trim()}`,
+        '',
+        `Name: ${data.name}`,
+        `Contact: ${data.contact}`,
+        data.type ? `Project type: ${data.type}` : '',
+        data.message ? `Details: ${data.message}` : '',
+      ];
+      return lines.filter(Boolean).join('\n');
+    };
+
+    const validate = () => {
+      const data = readForm();
+      const checks: Array<[keyof typeof data, boolean]> = [
+        ['name', data.name.length >= 2],
+        ['contact', data.contact.length >= 5],
+      ];
+      let ok = true;
+      checks.forEach(([key, valid]) => {
+        const error = document.getElementById(`err-${key}`);
+        const input = field(key);
+        if (error) error.hidden = valid;
+        if (input) input.setAttribute('aria-invalid', valid ? 'false' : 'true');
+        if (!valid) ok = false;
+      });
+      return ok;
+    };
+
+    const showStatus = (text: string) => {
       if (!status) return;
       status.style.display = 'block';
-      status.textContent =
-        'Demo form: no submission service configured yet. Please reach us on Instagram or WhatsApp.';
+      status.textContent = text;
+    };
+
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!validate()) {
+        showStatus('Please complete the highlighted fields.');
+        return;
+      }
+      const base = (form.dataset.wa ?? '').split('?')[0];
+      const url = `${base}?text=${encodeURIComponent(brief())}`;
+      window.open(url, '_blank', 'noopener');
+      showStatus('WhatsApp is opening with your request — just press send.');
+    });
+
+    emailFallback?.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (!validate()) {
+        showStatus('Please complete the highlighted fields.');
+        return;
+      }
+      const email = form?.dataset.email ?? '';
+      const subject = `Project request — ${readForm().name}`;
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief())}`;
+      showStatus('Your email app is opening with the request ready to send.');
     });
   </script>
 </Base>

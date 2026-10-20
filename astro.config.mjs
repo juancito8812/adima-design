@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // BASE_PATH lo inyecta el workflow de GitHub Pages (repo de proyecto -> /adima-design).
 // En local o en un dominio propio queda en '/'.
@@ -10,4 +11,5 @@ export default defineConfig({
   base,
   trailingSlash: 'ignore',
   build: { format: 'directory' },
+  integrations: [sitemap()],
 });

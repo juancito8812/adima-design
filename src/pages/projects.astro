@@ -47,7 +47,7 @@ const hero = portfolio[0];
     </div>
   </aside>
 
-  <main class="main">
+  <main class="main" id="main" tabindex="-1">
     <section class="block" id="portafolio-intro">
       <p class="eyebrow">Portfolio · {portfolio.length} projects</p>
       <h1>Work applied by hand, room after room.</h1>
@@ -67,6 +67,8 @@ const hero = portfolio[0];
 
     <figure class="hero-shot">
       <img
+            loading="lazy"
+            decoding="async"
         src={url(`/portfolio/${hero.slug}-1600.webp`)}
         srcset={srcset(hero.slug)}
         sizes="(max-width: 980px) 100vw, 78vw"
