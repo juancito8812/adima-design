@@ -50,44 +50,62 @@ export const stats = [
   { value: 'Miami', label: 'Serving South Florida' },
 ];
 
+/** Techniques, transcribed from the client portfolio document (PORTAFOLIO.docx). */
 export const services = [
   {
     title: 'Venetian plaster',
     icon: 'wall',
-    items: ['Polished and matte finishes', 'Marble-effect walls', 'Accent walls and columns'],
+    items: [
+      'Lime, marble dust and pigments',
+      'Multiple layers, burnished by hand',
+      'Smooth, reflective surface with depth',
+    ],
   },
   {
-    title: 'Microcement',
+    title: 'Microcement & Marmorino',
     icon: 'layers',
-    items: ['Floors, walls and ceilings', 'Seamless wet areas', 'Layer-by-layer application'],
+    items: [
+      'Floors, walls, wet areas and furniture',
+      'Seamless finish, natural stone look',
+      'Indoor and outdoor spaces',
+    ],
   },
   {
-    title: 'Limewash & mineral finishes',
-    icon: 'roller',
-    items: ['Cloud-effect walls', 'Breathable, 100% natural', 'Custom colour matching'],
-  },
-  {
-    title: 'Epoxy & wood panels',
+    title: 'Eco-friendly epoxy resin',
     icon: 'plan',
-    items: ['Wood-and-epoxy panels', 'Applied to any surface', 'Custom patterns'],
-  },
-  {
-    title: 'Bathrooms & wet areas',
-    icon: 'drop',
-    items: ['Walk-in showers', 'Niches and benches', 'Waterproofing and sealing'],
-  },
-  {
-    title: 'Interior design & colour',
-    icon: 'lamp',
-    items: ['Material and colour boards', 'Space and light planning', 'Project coordination'],
+    items: [
+      'Floors and decorative panels',
+      'High-gloss, highly durable finish',
+      'Minimalist textures to 3D marble effects',
+    ],
   },
 ];
 
+export const founder = {
+  name: 'Admel Perez',
+  role: 'Founder, Adima Design',
+  quote:
+    'Listening to, respecting and upholding our client’s vision and suggestions — turning their aspirations into exclusive, bespoke architectural realities.',
+};
+
+/** "Focused on exclusivity" block — from the client portfolio document. */
+export const distinction = {
+  eyebrow: 'Focused on exclusivity',
+  title: 'The art of designing with distinction, certification and conscience',
+  text: 'At Adima Design we transform spaces by blending advanced technology with a rigorous selection of top-quality, eco-friendly and sustainable materials. Backed by both national and international certifications, we guarantee a luxury service standard that combines sophistication, durability and environmental responsibility.',
+  items: [
+    { title: 'Certified', text: 'National and international certifications behind every specification.' },
+    { title: 'Sustainable', text: 'Eco-friendly materials selected for low impact and long life.' },
+    { title: 'Bespoke', text: 'Every finish designed around the client’s own aesthetic.' },
+  ],
+};
+
 /** Paragraphs of the "Studio" block (editorial tone). */
 export const about = [
-  'Adima Design is a Miami studio specialized in decorative interior finishes: venetian plaster, microcement, limewash and epoxy. We do not just cover walls — we build surfaces layer by layer until they look and feel the way you imagined them.',
-  'Every project starts with a conversation and a sample board: we test the finish, the colour and the sheen on your actual surface before committing to the whole space. No guesswork about the final result.',
-  'We work with mineral, lime-based and natural products, applied by hand by the same crew that quotes the job. That is why our finishes hold up in wet areas and high-traffic spaces.',
+  'At Adima Design we specialize in creating captivating environments for your home or business. Using expert techniques such as Venetian plaster, microcement, Marmorino and epoxy resin, we elevate interiors with customized solutions tailored to your aesthetic preferences — a harmonious blend of style and functionality, built with high-quality, long-lasting materials.',
+  'Venetian plaster is far more than a wall finish: a blend of lime, marble dust and pigments applied in multiple layers, each meticulously burnished to reach a reflective surface with real depth — a technique that dates back to ancient Rome.',
+  'Microcement is a thin layer of high-quality cement microparticles that goes over floors, walls, wet areas, outdoor spaces and even furniture without demolition. Marmorino adds the polished, stone-like feel that turns a room into a modern sanctuary.',
+  'We work with advanced application technology and a rigorous selection of eco-friendly, sustainable materials. The result is a luxury standard that holds up in wet areas and high-traffic spaces — and a process driven by listening to the client.',
 ];
 
 export const process = [

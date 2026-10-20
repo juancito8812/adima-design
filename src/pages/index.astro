@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { site, url, nav, stats, services, about, process, portfolio } from '../config';
+import { site, url, nav, stats, services, about, process, portfolio, founder, distinction } from '../config';
 
 const srcset = (slug: string) =>
   [480, 960, 1600].map((w) => `${url(`/portfolio/${slug}-${w}.webp`)} ${w}w`).join(', ');
@@ -56,13 +56,14 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
       <h1>Surfaces with depth, applied layer by layer.</h1>
       <div class="intro" style="margin-top:2rem">
         <p class="big">
-          Adima Design creates decorative finishes for interiors: venetian plaster, microcement,
-          limewash and epoxy. Residential and commercial spaces across South Florida.
+          Adima Design creates captivating environments for your home or business: Venetian
+          plaster, microcement, Marmorino and epoxy resin. Residential, commercial and renovation
+          projects across South Florida.
         </p>
         <p>
-          We test the finish on a sample board, prepare the surface properly and apply every coat by
-          hand. The result is a seamless wall or floor with real depth — not a printed imitation of
-          one.
+          Every finish is customized to your aesthetic and applied by hand, layer by layer, with
+          high-quality, long-lasting materials. The result is a seamless surface with real depth —
+          not a printed imitation of one.
         </p>
         <div class="intro-links">
           <a class="link-more" href={url('/#servicios')}>Services</a>
@@ -100,6 +101,24 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
             </ul>
           </article>
         ))}
+      </div>
+
+      <div class="distinction">
+        <div class="distinction-head">
+          <p class="eyebrow">{distinction.eyebrow}</p>
+          <h3>{distinction.title}</h3>
+        </div>
+        <div class="distinction-body">
+          <p>{distinction.text}</p>
+          <ul class="distinction-items">
+            {distinction.items.map((item) => (
+              <li>
+                <b>{item.title}</b>
+                <span>{item.text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -148,6 +167,10 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
               </div>
             ))}
           </div>
+          <figure class="founder">
+            <blockquote>{founder.quote}</blockquote>
+            <figcaption>{founder.name} · {founder.role}</figcaption>
+          </figure>
         </div>
 
         <div class="study-media">
@@ -221,10 +244,10 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
               <option value="">Select an option</option>
               <option>Venetian plaster</option>
               <option>Microcement</option>
-              <option>Limewash / accent wall</option>
-              <option>Epoxy &amp; wood panels</option>
-              <option>Bathroom / wet area</option>
-              <option>Interior design</option>
+              <option>Marmorino</option>
+              <option>Epoxy resin</option>
+              <option>Renovation</option>
+              <option>Commercial space</option>
               <option>Other</option>
             </select>
           </label>
