@@ -44,7 +44,8 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
     </div>
 
     <div class="rail-foot">
-      {site.address}<br />
+      {site.street}<br />
+      {site.city}<br />
       <a href={`mailto:${site.email}`}>{site.email}</a><br />
       {site.phone}
     </div>
@@ -52,7 +53,7 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
 
   <main class="main" id="main" tabindex="-1">
     <section class="block" id="inicio">
-      <p class="eyebrow">Interior finishes · {site.address}</p>
+      <p class="eyebrow">Interior finishes · {site.serviceArea}</p>
       <h1>Surfaces with depth, applied layer by layer.</h1>
       <div class="intro" style="margin-top:2rem" data-reveal>
         <p class="big">
@@ -225,7 +226,7 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
             <div><dt>Phone</dt><dd><a href={`tel:+${site.whatsapp}`}>{site.phone}</a></dd></div>
             <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
             <div><dt>Instagram</dt><dd><a href={site.social.instagram} target="_blank" rel="noopener">@adima.design</a></dd></div>
-            <div><dt>Location</dt><dd>{site.address}</dd></div>
+            <div><dt>Studio</dt><dd>{site.street}<br />{site.city}</dd></div>
             <div><dt>Hours</dt><dd>{site.hours}</dd></div>
           </dl>
         </div>

@@ -19,6 +19,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(url('/og-image.jpg'), Astro.site);
 
 /* LocalBusiness: only facts already confirmed by the client. */
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'HomeAndConstructionBusiness',
@@ -36,7 +37,20 @@ const schema = {
     { '@type': 'City', name: 'Hialeah' },
     { '@type': 'City', name: 'Fort Lauderdale' },
   ],
-  address: { '@type': 'PostalAddress', addressLocality: 'Miami', addressRegion: 'FL', addressCountry: 'US' },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.street,
+    addressLocality: 'Hollywood',
+    addressRegion: 'FL',
+    postalCode: '33021',
+    addressCountry: 'US',
+  },
+  openingHoursSpecification: days.map((d) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: d,
+    opens: '00:00',
+    closes: '23:59',
+  })),
   sameAs: [site.social.instagram],
   knowsAbout: ['Venetian plaster', 'Microcement', 'Marmorino', 'Limewash', 'Epoxy resin', 'Interior design'],
 };

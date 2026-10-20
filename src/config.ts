@@ -19,14 +19,16 @@ export const site = {
   name: 'Adima Design LLC',
   tagline: 'Interior design · Plastering · Decoration',
   description:
-    'Adima Design LLC — Miami-based studio specialized in venetian plaster, microcement, limewash and epoxy finishes for residential and commercial interiors.',
+    'Adima Design LLC — South Florida studio specialized in venetian plaster, microcement, limewash and epoxy finishes for residential and commercial interiors.',
   email: 'adimadesign2024@gmail.com',
   phone: '+1 (786) 727-7419',
   whatsapp: '17867277419',
-  // PLACEHOLDER: area code 786 is Miami-Dade, FL — confirm the exact address
-  address: 'Miami, FL',
-  // PLACEHOLDER
-  hours: 'Mon to Fri, 8:00 am – 5:00 pm',
+  street: '5733 Harding St, Apt 10',
+  city: 'Hollywood, FL 33021',
+  // Short form used in eyebrow / metadata lines
+  address: 'Hollywood, FL 33021',
+  serviceArea: 'Miami · Fort Lauderdale',
+  hours: 'Open 24 hours, 7 days a week',
   social: {
     instagram: 'https://www.instagram.com/adima.design',
     whatsapp: 'https://wa.me/17867277419',
