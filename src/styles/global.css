@@ -28,7 +28,7 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   color: var(--ink);
   padding: 0.75rem 1.1rem;
   border: 1px solid var(--ink);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: var(--track);
   text-transform: uppercase;
@@ -122,7 +122,7 @@ p { margin: 0 0 1.1rem; }
 }
 .brand-sub {
   display: block;
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -145,7 +145,7 @@ p { margin: 0 0 1.1rem; }
 .nav a[aria-current='true'] { color: var(--ink-soft); }
 
 .rail-foot {
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -159,7 +159,7 @@ p { margin: 0 0 1.1rem; }
 
 /* ---------- Etiquetas ---------- */
 .eyebrow {
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -206,7 +206,7 @@ p { margin: 0 0 1.1rem; }
 }
 .service ul { list-style: none; margin: 0.9rem 0 0; padding: 0; }
 .service li {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -230,7 +230,7 @@ p { margin: 0 0 1.1rem; }
   position: absolute;
   left: 0.8rem;
   bottom: 0.8rem;
-  font-size: 0.56rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   text-transform: uppercase;
   color: #aeaeaa;
@@ -255,7 +255,7 @@ p { margin: 0 0 1.1rem; }
 .project figcaption .meta {
   display: block;
   margin-top: 0.2rem;
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -265,7 +265,7 @@ p { margin: 0 0 1.1rem; }
 .hero-media img { display: block; width: 100%; height: auto; }
 .hero-media figcaption {
   margin-top: 0.7rem;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   text-transform: uppercase;
   color: var(--accent);
@@ -276,7 +276,7 @@ p { margin: 0 0 1.1rem; }
 .project .meta {
   display: block;
   margin-top: 0.2rem;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -290,7 +290,7 @@ p { margin: 0 0 1.1rem; }
 .study-media { display: grid; gap: 2.4rem; }
 .study-media figure { margin: 0; }
 .study-media figcaption {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -304,7 +304,7 @@ p { margin: 0 0 1.1rem; }
 .process div { border-top: 1px solid var(--line); padding-top: 0.9rem; }
 .process b {
   display: block;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   color: var(--accent);
   font-weight: 600;
@@ -317,7 +317,7 @@ p { margin: 0 0 1.1rem; }
 .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; margin: 2.4rem 0 0; }
 .facts strong { display: block; font-size: 1.35rem; font-weight: 400; letter-spacing: 0.02em; }
 .facts span {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -347,13 +347,13 @@ p { margin: 0 0 1.1rem; }
 .distinction-items li { border-top: 1px solid var(--line); padding-top: 0.7rem; }
 .distinction-items b {
   display: block;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: var(--track);
   text-transform: uppercase;
   margin-bottom: 0.35rem;
 }
-.distinction-items span { font-size: 0.7rem; color: var(--ink-soft); line-height: 1.5; display: block; }
+.distinction-items span { font-size: 0.75rem; color: var(--ink-soft); line-height: 1.5; display: block; }
 
 /* ---------- Firma ---------- */
 .founder { margin: 2.2rem 0 0; padding-left: 1.1rem; border-left: 1px solid var(--line); }
@@ -366,7 +366,7 @@ p { margin: 0 0 1.1rem; }
 }
 .founder figcaption {
   margin-top: 0.7rem;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -378,7 +378,7 @@ p { margin: 0 0 1.1rem; }
 .dl { margin: 0; }
 .dl div { display: flex; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
 .dl dt {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -392,7 +392,7 @@ form { display: grid; gap: 1.5rem; }
 .field { display: block; }
 .field span {
   display: block;
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -416,7 +416,7 @@ input:user-invalid, textarea:user-invalid { border-bottom-color: #b4341f; }
 .field-error {
   display: block;
   margin-top: 0.35rem;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #b4341f;
@@ -425,7 +425,7 @@ textarea { resize: vertical; }
 
 .form-alt {
   margin: 0.9rem 0 0;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: 0.06em;
   color: var(--ink-soft);
 }
@@ -453,7 +453,7 @@ textarea { resize: vertical; }
 
 /* ---------- Avisos ---------- */
 .todo {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #b3a894;
@@ -469,7 +469,7 @@ textarea { resize: vertical; }
   gap: 0.8rem 2rem;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   text-transform: uppercase;
   color: var(--ink-soft);

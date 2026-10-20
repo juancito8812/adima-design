@@ -67,8 +67,6 @@ const hero = portfolio[0];
 
     <figure class="hero-shot">
       <img
-            loading="lazy"
-            decoding="async"
         src={url(`/portfolio/${hero.slug}-1600.webp`)}
         srcset={srcset(hero.slug)}
         sizes="(max-width: 980px) 100vw, 78vw"
@@ -86,7 +84,7 @@ const hero = portfolio[0];
 
     <section class="block" id="galeria">
       <div class="gal-head">
-        <p class="eyebrow" style="margin:0">Gallery</p>
+        <h2 class="eyebrow" style="margin:0">Gallery</h2>
         <div class="filters" role="tablist" aria-label="Filter projects">
           {filters.map((f, i) => (
             <button type="button" role="tab" data-filter={f.id} aria-selected={i === 0 ? 'true' : 'false'}>
@@ -270,7 +268,7 @@ const hero = portfolio[0];
     gap: 0.3rem 1rem;
     align-items: baseline;
     margin-top: 0.7rem;
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink-soft);
@@ -289,7 +287,7 @@ const hero = portfolio[0];
     padding: 0;
     cursor: pointer;
     font: inherit;
-    font-size: 0.66rem;
+    font-size: 0.75rem;
     letter-spacing: var(--track);
     text-transform: uppercase;
     color: var(--ink-soft);
@@ -322,12 +320,12 @@ const hero = portfolio[0];
   }
   .shot-btn:hover img { transform: scale(1.025); filter: brightness(1.03); }
   .shot figcaption { margin: 0.6rem 0 1.5rem; }
-  .shot .meta { font-size: 0.62rem; color: #6b6459; }
+  .shot .meta { font-size: 0.75rem; color: #6b6459; }
   .shot h3 { margin: 0; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.06em; }
   .shot .meta {
     display: block;
     margin-top: 0.15rem;
-    font-size: 0.58rem;
+    font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink-soft);
@@ -338,7 +336,7 @@ const hero = portfolio[0];
   .cats article p { flex: 1 1 auto; }
   .cats h3 { font-size: 0.74rem; }
   .cats p { font-size: 0.8rem; color: var(--ink-soft); }
-  .cat-jump { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; font-size: 0.66rem; }
+  .cat-jump { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; font-size: 0.75rem; }
 
   .lightbox {
     position: fixed;
@@ -352,7 +350,7 @@ const hero = portfolio[0];
   .lightbox[hidden] { display: none; }
   .lightbox figure { margin: 0; max-width: 100%; max-height: 100%; display: grid; gap: 0.8rem; justify-items: center; }
   .lightbox img { max-width: 100%; max-height: 78vh; width: auto; height: auto; display: block; }
-  .lightbox figcaption { color: #e8e6e1; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; }
+  .lightbox figcaption { color: #e8e6e1; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; }
   .lightbox figcaption span { display: block; color: #9b968c; margin-top: 0.2rem; }
   .lb-close, .lb-nav {
     position: absolute;
