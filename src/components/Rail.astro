@@ -1,0 +1,50 @@
+---
+import Logo from './Logo.astro';
+import { site, url, nav } from '../config';
+
+interface Props {
+  /** Section id on the home page, e.g. 'contacto', for the page that renders it. */
+  active?: string;
+}
+
+const { active = '' } = Astro.props;
+
+// pathname without the GitHub Pages base, no trailing slash
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = (Astro.url.pathname.slice(base.length).replace(/\/+$/, '') || '/') as string;
+
+const isCurrent = (href: string) => {
+  if (href.startsWith('/#')) return path === '/' && active === href.slice(2);
+  if (href === '/') return path === '/' && !active;
+  return path === href || path.startsWith(`${href}/`);
+};
+---
+
+<aside class="rail">
+  <div>
+    <a class="brand" href={url('/')}>
+      <span aria-hidden="true"><Logo size={58} /></span>
+      <span class="brand-name">{site.wordmark}</span>
+      <span class="brand-sub">{site.tagline}</span>
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      {nav.map((item) => (
+        <a
+          href={url(item.href)}
+          data-hash={item.hash || undefined}
+          aria-current={isCurrent(item.href) ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+
+  <div class="rail-foot">
+    {site.street}<br />
+    {site.city}<br />
+    <a href={`mailto:${site.email}`}>{site.email}</a><br />
+    {site.phone}
+  </div>
+</aside>

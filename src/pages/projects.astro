@@ -1,4 +1,5 @@
 ---
+import Rail from '../components/Rail.astro';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { site, url, portfolio, portfolioCategories } from '../config';
@@ -19,35 +20,7 @@ const hero = portfolio[0];
   description="Selected Adima Design projects: venetian plaster, microcement, marble-effect finishes and epoxy floors for homes and businesses in Miami, Doral, Fort Lauderdale and Hialeah."
   active="portfolio"
 >
-  <aside class="rail">
-    <div>
-      <a class="brand" href={url('/')}>
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-          <rect x="4" y="4" width="56" height="56" stroke="#e4e4e4" />
-          <path d="M20 46 L32 18 L44 46" />
-          <path d="M25 36 H39" />
-        </svg>
-        <span class="brand-name">{site.name}</span>
-        <span class="brand-sub">{site.tagline}</span>
-      </a>
-
-      <nav class="nav" aria-label="Main">
-        <a href={url('/')}>Home</a>
-        <a href={url('/projects')} aria-current="true">Portfolio</a>
-        <a href={url('/#servicios')}>Services</a>
-        <a href={url('/#estudio')}>Studio</a>
-        <a href={url('/#testimonials')}>Testimonials</a>
-        <a href={url('/#contacto')}>Contact</a>
-      </nav>
-    </div>
-
-    <div class="rail-foot">
-      {site.street}<br />
-      {site.city}<br />
-      <a href={`mailto:${site.email}`}>{site.email}</a><br />
-      {site.phone}
-    </div>
-  </aside>
+  <Rail />
 
   <main class="main" id="main" tabindex="-1">
     <section class="block" id="portafolio-intro">
@@ -87,9 +60,9 @@ const hero = portfolio[0];
     <section class="block" id="galeria">
       <div class="gal-head">
         <h2 class="eyebrow" style="margin:0">Gallery</h2>
-        <div class="filters" role="tablist" aria-label="Filter projects">
+        <div class="filters" role="group" aria-label="Filter projects">
           {filters.map((f, i) => (
-            <button type="button" role="tab" data-filter={f.id} aria-selected={i === 0 ? 'true' : 'false'}>
+            <button type="button" data-filter={f.id} aria-pressed={i === 0 ? 'true' : 'false'}>
               {f.label}
             </button>
           ))}
@@ -171,7 +144,7 @@ const hero = portfolio[0];
     <button class="lb-nav lb-prev" type="button" aria-label="Previous">&#8592;</button>
     <button class="lb-nav lb-next" type="button" aria-label="Next">&#8594;</button>
     <figure>
-      <img id="lb-img" src="" alt="" />
+      <img id="lb-img" alt="" />
       <figcaption>
         <strong id="lb-title"></strong>
         <span id="lb-meta"></span>
@@ -186,7 +159,7 @@ const hero = portfolio[0];
     // ---- Filters -------------------------------------------------------
     const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('.filters button'));
     const applyFilter = (id: string) => {
-      chips.forEach((c) => c.setAttribute('aria-selected', String(c.dataset.filter === id)));
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.filter === id)));
       shots.forEach((s) => {
         const show = id === 'all' || s.dataset.cat === id;
         s.hidden = !show;
@@ -206,6 +179,7 @@ const hero = portfolio[0];
     const lbTitle = document.getElementById('lb-title');
     const lbMeta = document.getElementById('lb-meta');
     let current = 0;
+    let opener: HTMLButtonElement | null = null;
 
     const visible = () => shots.filter((s) => !s.hidden);
 
@@ -220,13 +194,21 @@ const hero = portfolio[0];
       lbImg.alt = btn.querySelector('img')?.alt ?? '';
       if (lbTitle) lbTitle.textContent = btn.dataset.title ?? '';
       if (lbMeta) lbMeta.textContent = btn.dataset.meta ?? '';
-      if (lb) lb.hidden = false;
-      document.body.style.overflow = 'hidden';
+      if (lb && lb.hidden) {
+        opener = btn;
+        lb.hidden = false;
+        document.body.style.overflow = 'hidden';
+        document.querySelector<HTMLButtonElement>('.lb-close')?.focus();
+      }
     };
 
     const close = () => {
-      if (lb) lb.hidden = true;
+      if (!lb || lb.hidden) return;
+      lb.hidden = true;
       document.body.style.overflow = '';
+      if (lbImg) lbImg.removeAttribute('src');
+      opener?.focus();
+      opener = null;
     };
 
     document.querySelectorAll<HTMLButtonElement>('.shot-btn').forEach((btn) => {
@@ -244,11 +226,31 @@ const hero = portfolio[0];
       if (event.target === lb) close();
     });
 
+    const focusables = () =>
+      Array.from(lb?.querySelectorAll<HTMLButtonElement>('button') ?? []);
+
     document.addEventListener('keydown', (event) => {
       if (!lb || lb.hidden) return;
-      if (event.key === 'Escape') close();
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        close();
+        return;
+      }
       if (event.key === 'ArrowLeft') show(current - 1);
       if (event.key === 'ArrowRight') show(current + 1);
+      if (event.key === 'Tab') {
+        const items = focusables();
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     });
 
     // ---- Swipe ---------------------------------------------------------
@@ -298,7 +300,7 @@ const hero = portfolio[0];
     padding: 0.65rem 0;
     min-height: 44px;
   }
-  .filters button[aria-selected='true'] { color: var(--ink); border-bottom: 1px solid var(--ink); }
+  .filters button[aria-pressed='true'] { color: var(--ink); border-bottom: 1px solid var(--ink); }
   .filters button:hover { color: var(--ink); }
 
   .grid { columns: 3; column-gap: 1.4rem; }
@@ -324,8 +326,7 @@ const hero = portfolio[0];
   }
   .shot-btn:hover img { transform: scale(1.025); filter: brightness(1.03); }
   .shot figcaption { margin: 0.6rem 0 1.5rem; }
-  .shot .meta { font-size: 0.75rem; color: #6b6459; }
-  .shot h3 { margin: 0; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.06em; }
+  .shot h3 { margin: 0; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02em; text-wrap: balance; }
   .shot .meta {
     display: block;
     margin-top: 0.15rem;

@@ -17,6 +17,8 @@ export const url = (path = '/') => `${BASE}${path.replace(/^\//, '')}`;
 
 export const site = {
   name: 'Adima Design LLC',
+  // Wordmark: the legal suffix belongs in the footer and the legal page, not in the rail.
+  wordmark: 'Adima Design',
   tagline: 'Interior design · Plastering · Decoration',
   description:
     'Adima Design LLC — South Florida studio specialized in venetian plaster, microcement, limewash and epoxy finishes for residential and commercial interiors.',
@@ -28,7 +30,7 @@ export const site = {
   // Short form used in eyebrow / metadata lines
   address: 'Hollywood, FL 33021',
   serviceArea: 'Miami · Fort Lauderdale',
-  hours: 'Open 24 hours, 7 days a week',
+  hours: 'By appointment',
   social: {
     instagram: 'https://www.instagram.com/adima.design',
     whatsapp: 'https://wa.me/17867277419',
@@ -89,8 +91,9 @@ export const nav = [
   { label: 'Home', href: '/', hash: 'inicio' },
   { label: 'Services', href: '/#servicios', hash: 'servicios' },
   { label: 'Work', href: '/#proyectos', hash: 'proyectos' },
+  { label: 'Portfolio', href: '/projects', hash: '' },
   { label: 'Studio', href: '/#estudio', hash: 'estudio' },
-  { label: 'Testimonials', href: '/#testimonials', hash: 'testimonials' },
+  { label: 'Testimonials', href: '/testimonials', hash: '' },
   { label: 'Contact', href: '/#contacto', hash: 'contacto' },
 ];
 
@@ -238,7 +241,8 @@ export const portfolioCategories = [
 // (Google, WhatsApp, Instagram). No inventar ni "pulir" citas: Google penaliza
 // reseñas falsas y en EE. UU. la FTC multa testimonios inventados.
 // Deja el array vacío y la sección no se muestra.
-export const reviews = [
+export const reviews: { quote: string; name: string; detail: string }[] = [
+  /*
   {
     quote:
       'PLACEHOLDER — pega aquí la reseña real, palabra por palabra. Las paredes quedaron con el efecto que buscábamos y el equipo mantuvo el local limpio todos los días.',
@@ -257,6 +261,7 @@ export const reviews = [
     name: 'PLACEHOLDER NAME',
     detail: 'Reception & hall · Fort Lauderdale, FL',
   },
+  */
 ];
 
 // Opcional: link al perfil de Google Business para "ver todas las reseñas"
