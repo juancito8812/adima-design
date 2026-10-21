@@ -1,0 +1,195 @@
+---
+import DocPage from '../components/DocPage.astro';
+import { commitments, legal, site } from '../config';
+
+const cards = commitments;
+
+/** Only published when the client confirms the data in writing. */
+const facts = [
+  { label: 'Legal name', value: legal.entity },
+  { label: 'Entity', value: legal.entityType },
+  {
+    label: 'License',
+    value: legal.license
+      ? `${legal.license}${legal.licenseAuthority ? ` — ${legal.licenseAuthority}` : ''}`
+      : 'Provided in writing with every proposal and contract',
+  },
+  {
+    label: 'Insurance',
+    value: legal.insurance || 'Certificate of insurance provided with every proposal',
+  },
+  { label: 'Service area', value: 'Miami-Dade and Broward Counties, Florida' },
+  { label: 'Address', value: `${site.street}, ${site.city}` },
+];
+---
+
+<DocPage
+  title={`Licensing, permits and consumer rights — ${site.name}`}
+  description="How Adima Design LLC works in Florida: contractor licensing, permits, written contracts, the 3-day right to cancel, lien waivers and warranty terms for venetian plaster, microcement and epoxy work in Miami and Fort Lauderdale."
+  eyebrow="Legal & consumer protection"
+  heading="Who you are hiring, and what protects you."
+  lead="Decorative finishes are construction work. In Florida that comes with rules that exist for your benefit — licensing, written contracts, permits, lien notices and a cancellation window. Here is exactly how we work inside them."
+  active="legal"
+>
+  <h2 id="who">1. The company you are hiring</h2>
+  <dl class="doc-facts">
+    {facts.map((f) => (
+      <div>
+        <dt>{f.label}</dt>
+        <dd>{f.value}</dd>
+      </div>
+    ))}
+  </dl>
+  <p>
+    Adima Design LLC is a Florida limited liability company. We design and apply interior finishes —
+    venetian plaster, marmorino, microcement, limewash and epoxy resin — for homes, offices and
+    commercial spaces in South Florida. We do not perform electrical, plumbing, structural,
+    roofing or HVAC work, and we do not subcontract those trades without telling you in writing.
+  </p>
+  {legal.license ? (
+    <p>
+      You can verify our license yourself in the State of Florida database:{' '}
+      <a href={legal.licenseLookup} target="_blank" rel="noopener">DBPR license lookup</a>. Local
+      jurisdictions (Miami-Dade County, City of Miami, Broward County) may also require a
+      certificate of competency — ask us for the one that applies to your address.
+    </p>
+  ) : (
+    <p>
+      Florida requires a licensed or registered contractor for this type of work, and the license
+      number must appear on every proposal, bid, contract and advertisement
+      (<abbr title="Florida Statutes">F.S.</abbr> 489.119(5)(b)). Our license and certificate of
+      insurance are sent with your written proposal — ask for them before you sign anything, and
+      look us up in the{' '}
+      <a href={legal.licenseLookup} target="_blank" rel="noopener">DBPR license lookup</a>.
+    </p>
+  )}
+
+  <h2 id="commitments">2. What we put in writing</h2>
+  <ul class="doc-cards">
+    {cards.map((c) => (
+      <li>
+        <strong>{c.title}</strong>
+        <span>{c.text}</span>
+      </li>
+    ))}
+  </ul>
+
+  <h2 id="contract">3. Your contract, deposit and schedule</h2>
+  <p>
+    Every job starts with a written proposal that states scope, materials and products, number of
+    coats, sheen, square footage, price, payment milestones and start date. Nothing is charged
+    before you approve it.
+  </p>
+  <p>
+    If a residential contract requires an initial payment above 10% of the contract price, Florida
+    law (F.S. 489.126) requires the contractor to apply for the necessary permits within 30 days
+    and to start work within 90 days after the permits are issued, unless you agree in writing to
+    a longer period. Using your deposit for another job is a crime in Florida, not just a breach of
+    contract.
+  </p>
+
+  <h2 id="cancel">4. Your 3-business-day right to cancel</h2>
+  <p>
+    If you sign at your home (a home solicitation sale), you may cancel until midnight of the third
+    business day after signing — no reason needed (F.S. 501.025). Tell us in writing, by hand, mail
+    or message. If work has not started, you get your deposit back. We put this notice on the
+    agreement itself so it is never a surprise.
+  </p>
+
+  <h2 id="permits">5. Permits and inspections</h2>
+  <p>
+    Most interior decorative finishes over a sound substrate do not need a building permit. Work
+    that changes the structure, adds moisture-sensitive assemblies, touches exterior stucco
+    cladding, or involves electrical or plumbing does. We tell you which case you are in during the
+    estimate, and where a permit applies we pull it under our license and coordinate the
+    inspection.
+  </p>
+
+  <h2 id="liens">6. Liens: what the notices mean</h2>
+  <p>
+    Florida's Construction Lien Law (Chapter 713) protects subcontractors and suppliers, which is
+    why you may receive a <em>Notice to Owner</em> even though you already paid us: it must be
+    served within 45 days of first furnishing labor or materials (F.S. 713.06), and a lien must be
+    recorded within 90 days of the last work (F.S. 713.08). Receiving one is not a demand for
+    money — it is a warning that someone down the chain wants to preserve a claim.
+  </p>
+  <ul>
+    <li>We give you a list of the subs and suppliers we use, on request.</li>
+    <li>Every payment is exchanged for a lien release covering the work paid for.</li>
+    <li>
+      Before your final payment we provide the contractor's final payment affidavit
+      (F.S. 713.06(3)(d)) so you can pay the rest without risk.
+    </li>
+  </ul>
+
+  <h2 id="warranty">7. Warranty and care</h2>
+  <p>
+    {legal.warranty
+      ? `Workmanship is covered by our ${legal.warranty}.`
+      : 'Workmanship warranty terms are stated in your contract.'}{' '}
+    Products carry their manufacturer's warranty, and we hand over the technical data and care
+    sheet for every product we use. Excluded: damage from moisture intrusion or leaks, structural
+    movement or cracking of the substrate, impact, abrasion, harsh chemicals, and cleaning with
+    anything other than the methods on the care sheet. Touch-ups and repairs after the warranty
+    period are quoted separately.
+  </p>
+
+  <h2 id="reviews">8. Reviews and testimonials</h2>
+  <p>
+    Every testimonial on this site is written by a real client, published as written, never bought
+    and never edited to change its meaning. That is not only our policy — since October 2024 the
+    FTC's rule on consumer reviews (16 C.F.R. Part 465) makes fake reviews, purchased reviews and
+    review suppression illegal nationwide. You can ask us to remove your testimonial at any time
+    and we will.
+  </p>
+
+  <h2 id="complaints">9. If something goes wrong</h2>
+  <p>
+    Start with us: {site.email} · {site.phone}. We answer in writing and we put a remedy plan with
+    dates in the reply. If that does not resolve it, Florida gives you independent routes:
+  </p>
+  <ul>
+    <li>
+      <strong>DBPR / Construction Industry Licensing Board</strong> — complaint against a licensed
+      contractor, including unlicensed activity reports.
+    </li>
+    <li>
+      <strong>Florida Attorney General</strong> — deceptive trade practices under the Florida
+      Deceptive and Unfair Trade Practices Act (F.S. 501, Part II).
+    </li>
+    <li>
+      <strong>Homeowners' Construction Recovery Fund</strong> — after a final judgment or
+      arbitration award against a state-certified contractor, recovery may be available under F.S.
+      489.141.
+    </li>
+    <li>
+      <strong>Small claims / county court</strong> — for disputes within the statutory limits.
+    </li>
+  </ul>
+
+  <h2 id="law">10. Governing law and intellectual property</h2>
+  <p>
+    These terms are governed by the laws of the {legal.governingLaw}, without regard to conflict
+    rules, and any dispute not otherwise resolved belongs in the courts of {legal.venue}. The
+    photographs, text and finish samples on this site are the property of {legal.entity} or the
+    client who commissioned the work; they may not be reused commercially without permission.
+  </p>
+
+  <h2 id="accessibility">11. Accessibility</h2>
+  <p>
+    This site targets WCAG 2.1 AA: keyboard navigation, visible focus, readable contrast and no
+    motion when your system asks for reduced motion. If any part of it is hard to use, email{' '}
+    <a href={`mailto:${site.email}`}>{site.email}</a> and we will fix it or send the information in
+    another format.
+  </p>
+
+  <p class="doc-updated">
+    Last updated {legal.updated}. Questions about this page: <a href={`mailto:${site.email}`}>{site.email}</a>.
+    See also our <a href="../privacy/">Privacy notice</a>.
+  </p>
+
+  <p class="doc-note">
+    This page explains how we work in plain language; it is not legal advice to you. Statute
+    references are to the 2024 Florida Statutes.
+  </p>
+</DocPage>

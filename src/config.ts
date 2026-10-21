@@ -35,6 +35,55 @@ export const site = {
   },
 };
 
+/**
+ * Compliance facts used on /legal and /privacy.
+ * Leave a field empty and the page simply omits that claim — never publish a
+ * license or policy number the client has not confirmed in writing.
+ * Florida requires the contractor's license number in every advertisement,
+ * proposal, bid and contract (F.S. 489.119(5)(b)), so `license` should be filled
+ * before the site goes on a custom domain.
+ */
+export const legal = {
+  entity: 'Adima Design LLC',
+  entityType: 'Limited liability company organized under the laws of the State of Florida',
+  license: '', // e.g. 'CGC1523456' — DBPR certified or local certificate number
+  licenseAuthority: '', // e.g. 'Florida DBPR · Certified Building Contractor'
+  licenseLookup: 'https://www.myfloridalicense.com/wl11.asp',
+  insurance: '', // e.g. 'General liability $2M aggregate · Workers’ comp policy in force'
+  warranty: '', // e.g. '2-year workmanship warranty'
+  updated: 'October 21, 2026',
+  governingLaw: 'State of Florida, United States',
+  venue: 'Broward County, Florida',
+};
+
+/** What we guarantee in writing, on the site and in every proposal. */
+export const commitments = [
+  {
+    title: 'Licensed & insured',
+    text: 'Licensing status and certificate of insurance are attached to every written proposal, before you pay anything.',
+  },
+  {
+    title: 'Written scope first',
+    text: 'Materials, number of coats, sheen, square footage, price and schedule in writing — no verbal-only deals.',
+  },
+  {
+    title: 'Permits when required',
+    text: 'We say up front whether your job needs a permit, and we do not start permitted work without it.',
+  },
+  {
+    title: 'Lien waivers on payment',
+    text: 'Final payment is exchanged for a signed release of lien, so nothing is left hanging over your title.',
+  },
+  {
+    title: '3-day right to cancel',
+    text: 'Signed at your home? Florida gives you until midnight of the third business day to cancel (F.S. 501.025).',
+  },
+  {
+    title: 'Change orders in writing',
+    text: 'If the scope moves mid-job, you get the new price and schedule in writing and approve it before we continue.',
+  },
+];
+
 /** Vertical rail navigation. */
 export const nav = [
   { label: 'Home', href: '/', hash: 'inicio' },

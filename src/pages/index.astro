@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { site, url, nav, stats, services, about, process, portfolio, founder, distinction, reviews, reviewsUrl } from '../config';
+import { site, url, nav, stats, services, about, process, portfolio, founder, distinction, reviews, reviewsUrl, commitments } from '../config';
 
 const srcset = (slug: string) =>
   [480, 960, 1600].map((w) => `${url(`/portfolio/${slug}-${w}.webp`)} ${w}w`).join(', ');
@@ -245,6 +245,30 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
       </section>
     )}
 
+    <section class="block" id="trust">
+      <p class="eyebrow">Licensing & consumer protection</p>
+      <h2 data-reveal>Construction rules, on your side</h2>
+      <p class="doc-lead" data-reveal>
+        Decorative finishes are construction work in Florida — licensing, written contracts, permits
+        and lien notices apply. Here is what we commit to in writing, before you pay anything.
+      </p>
+
+      <ul class="doc-cards" style="margin-top:2.4rem" data-reveal>
+        {commitments.map((c) => (
+          <li>
+            <strong>{c.title}</strong>
+            <span>{c.text}</span>
+          </li>
+        ))}
+      </ul>
+
+      <p class="reviews-link">
+        <a href={url('/legal')}>Licensing, permits and your consumer rights →</a>
+        {' · '}
+        <a href={url('/privacy')}>Privacy notice →</a>
+      </p>
+    </section>
+
     <section class="block" id="contacto">
       <p class="eyebrow">Contact</p>
       <h2 data-reveal>Tell us about your space</h2>
@@ -301,6 +325,8 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
   <footer class="foot">
     <span>© {new Date().getFullYear()} {site.name} · {site.tagline}</span>
     <span class="social">
+      <a href={url('/legal')}>Legal</a>
+      <a href={url('/privacy')}>Privacy</a>
       <a href={site.social.instagram} target="_blank" rel="noopener">
         <Icon name="instagram" size={26} />Instagram
       </a>

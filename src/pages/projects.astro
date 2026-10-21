@@ -158,6 +158,8 @@ const hero = portfolio[0];
   <footer class="foot">
     <span>© {new Date().getFullYear()} {site.name} · {site.tagline}</span>
     <span class="social">
+      <a href={url('/legal')}>Legal</a>
+      <a href={url('/privacy')}>Privacy</a>
       <a href={site.social.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={26} />Instagram</a>
       <a href={waLink} target="_blank" rel="noopener"><Icon name="whatsapp" size={26} />WhatsApp</a>
       <a href={`mailto:${site.email}`}><Icon name="mail" size={26} />Email</a>
