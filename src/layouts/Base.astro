@@ -18,8 +18,9 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(url('/og-image.jpg'), Astro.site);
 
-/* LocalBusiness: only facts already confirmed by the client. */
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+/* LocalBusiness: only facts already confirmed by the client.
+   No openingHoursSpecification: hours are by appointment, and a 24/7 block is
+   a claim we cannot back. */
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'HomeAndConstructionBusiness',
@@ -45,12 +46,6 @@ const schema = {
     postalCode: '33021',
     addressCountry: 'US',
   },
-  openingHoursSpecification: days.map((d) => ({
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: d,
-    opens: '00:00',
-    closes: '23:59',
-  })),
   sameAs: [site.social.instagram],
   knowsAbout: ['Venetian plaster', 'Microcement', 'Marmorino', 'Limewash', 'Epoxy resin', 'Interior design'],
 };

@@ -9,6 +9,7 @@
   --font: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --track: 0.16em;
   --focus: #1b1b1b;
+  --danger: #b4341f;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
@@ -71,8 +72,8 @@ h1, h2, h3 {
   line-height: 1.15;
   margin: 0 0 1rem;
 }
-h1 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); }
-h2 { font-size: clamp(1.15rem, 2.2vw, 1.5rem); }
+h1 { font-size: clamp(1.75rem, 4.6vw, 3rem); }
+h2 { font-size: clamp(1.25rem, 2.6vw, 1.75rem); }
 h3 { font-size: 0.82rem; letter-spacing: var(--track); font-weight: 600; }
 
 p { margin: 0 0 1.1rem; }
@@ -102,10 +103,22 @@ p { margin: 0 0 1.1rem; }
   .rail {
     position: static;
     width: auto;
-    padding: 1.6rem 1.5rem 0;
-    gap: 1.5rem;
+    padding: 1.5rem 1.5rem 0;
+    gap: 0;
   }
-  .main { margin-left: 0; padding: 2rem 1.5rem 0; }
+  .main { margin-left: 0; padding: 1.6rem 1.5rem 0; }
+  /* The address block repeats the Contact section and pushed the first photo
+     below the fold on a 390x844 phone. Keep one copy. */
+  .rail-foot { display: none; }
+  /* Phone: headline, then the work, then the copy — otherwise the first photo
+     lands 900px down and the page opens on pure text. */
+  #inicio { display: flex; flex-direction: column; }
+  #inicio > .eyebrow { order: 1; }
+  #inicio > h1 { order: 2; }
+  #inicio > .hero-media { order: 3; margin: 1.5rem 0 1.9rem; }
+  #inicio > .intro { order: 4; }
+  .brand svg { width: 42px; height: 42px; margin-bottom: 0.5rem; }
+  .brand-sub { font-size: 0.75rem; }
 }
 
 /* ---------- Marca ---------- */
@@ -113,7 +126,7 @@ p { margin: 0 0 1.1rem; }
 .brand svg { width: 58px; height: 58px; display: block; margin-bottom: 0.7rem; color: var(--accent); }
 .brand-name {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: var(--track);
   text-transform: uppercase;
@@ -138,11 +151,21 @@ p { margin: 0 0 1.1rem; }
   color: var(--accent);
   display: inline-flex;
   gap: 0.7rem;
+  align-items: center;
+  min-height: 24px;
+  padding-block: 0.2rem;
+  line-height: 1.5;
   transition: color 0.2s ease;
 }
-.nav a::before { content: 'I'; font-weight: 300; }
+.nav a::before {
+  content: '';
+  width: 1px;
+  height: 0.68em;
+  background: var(--line);
+}
+.nav a:first-child::before { display: none; }
 .nav a:hover,
-.nav a[aria-current='true'] { color: var(--ink-soft); }
+.nav a[aria-current='page'] { color: var(--ink-soft); }
 
 .rail-foot {
   font-size: 0.75rem;
@@ -168,7 +191,11 @@ p { margin: 0 0 1.1rem; }
 }
 
 @media (max-width: 980px) {
-  .nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; margin: 1.4rem 0 0; }
+  /* Al partirse en varias líneas la barrita de .nav a::before quedaba como
+     primer carácter de la línea; con puntos, el sobrante colgaba al final.
+     En móvil separamos solo con espacio. */
+  .nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; margin: 1rem 0 0; }
+  .nav a::before { display: none; }
 }
 
 /* ---------- Etiquetas ---------- */
@@ -181,7 +208,7 @@ p { margin: 0 0 1.1rem; }
   margin: 0 0 1.6rem;
 }
 .link-more {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: var(--track);
   text-transform: uppercase;
@@ -212,7 +239,7 @@ p { margin: 0 0 1.1rem; }
 .service-head { display: flex; align-items: center; gap: 0.85rem; color: var(--ink); }
 .service-head svg { flex: 0 0 auto; }
 .service-head span {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: var(--track);
   text-transform: uppercase;
@@ -277,7 +304,7 @@ p { margin: 0 0 1.1rem; }
 }
 .project:hover img { filter: brightness(0.96); }
 .project figcaption { margin: 0 0 0.6rem; }
-.project figcaption h3 { margin: 0; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.06em; text-transform: none; }
+.project figcaption h3 { margin: 0; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02em; text-transform: none; text-wrap: balance; }
 .project figcaption .meta {
   display: block;
   margin-top: 0.2rem;
@@ -326,7 +353,7 @@ p { margin: 0 0 1.1rem; }
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
-.process h3 { font-size: 0.72rem; }
+.process h3 { font-size: 0.75rem; }
 .process p { font-size: 0.76rem; color: var(--ink-soft); margin: 0; }
 
 /* ---------- Datos ---------- */
@@ -426,9 +453,9 @@ input, textarea, select {
   border-radius: 0;
   appearance: none;
 }
-select { text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.72rem; }
+select { text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
 input:focus-visible, textarea:focus-visible, select:focus-visible { border-bottom-color: var(--ink); }
-input:user-invalid, textarea:user-invalid { border-bottom-color: #b4341f; }
+input:user-invalid, textarea:user-invalid { border-bottom-color: var(--danger); }
 .field-error[hidden] { display: none; }
 .field-error {
   display: block;
@@ -436,7 +463,7 @@ input:user-invalid, textarea:user-invalid { border-bottom-color: #b4341f; }
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #b4341f;
+  color: var(--danger);
 }
 textarea { resize: vertical; }
 
@@ -459,7 +486,7 @@ textarea { resize: vertical; }
   border-bottom: 1px solid var(--ink);
   padding: 0 0 0.15rem;
   font: inherit;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: var(--track);
   text-transform: uppercase;
@@ -473,7 +500,7 @@ textarea { resize: vertical; }
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #b3a894;
+  color: var(--ink-soft);
   margin: 1.6rem 0 0;
 }
 
@@ -491,8 +518,8 @@ textarea { resize: vertical; }
   text-transform: uppercase;
   color: var(--ink-soft);
 }
-@media (max-width: 980px) { .foot { margin-left: 0; padding: 0 1.5rem 3rem; } }
-.social { display: flex; gap: 1.6rem; align-items: center; }
+@media (max-width: 980px) { .foot { margin-left: 0; padding: 0 1.5rem 3rem; row-gap: 1.2rem; } }
+.social { display: flex; flex-wrap: wrap; gap: 0.7rem 1.5rem; align-items: center; }
 .social a { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); }
 .social a:hover { color: var(--ink-soft); }
 .social svg { width: 18px; height: 18px; }
@@ -647,7 +674,7 @@ textarea { resize: vertical; }
 }
 .doc-facts > div { background: var(--bg); padding: 0.9rem 1rem; }
 .doc-facts dt {
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   letter-spacing: var(--track);
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -684,3 +711,19 @@ textarea { resize: vertical; }
   color: var(--ink-soft);
 }
 .doc-note { font-size: 0.75rem; color: var(--ink-soft); }
+
+/* ---------- Hero: dos columnas de texto en escritorio ---------- */
+/* Con una sola columna de párrafo la foto quedaba 700px abajo: apenas una
+   franja asomaba en el primer pantallazo. */
+@media (min-width: 981px) {
+  #inicio .intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3.2rem;
+    max-width: none;
+    align-items: start;
+  }
+  #inicio .intro .big { grid-column: 1; }
+  #inicio .intro p:not(.big) { grid-column: 2; margin-top: 0; }
+  #inicio .intro-links { grid-column: 1 / -1; margin-top: 1.6rem; }
+}

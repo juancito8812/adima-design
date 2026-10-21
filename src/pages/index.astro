@@ -1,7 +1,8 @@
 ---
+import Rail from '../components/Rail.astro';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { site, url, nav, stats, services, about, process, portfolio, founder, distinction, reviews, reviewsUrl, commitments } from '../config';
+import { site, url, stats, services, about, process, portfolio, founder, distinction, reviews, reviewsUrl, commitments } from '../config';
 
 const srcset = (slug: string) =>
   [480, 960, 1600].map((w) => `${url(`/portfolio/${slug}-${w}.webp`)} ${w}w`).join(', ');
@@ -24,32 +25,7 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
 ---
 
 <Base>
-  <aside class="rail">
-    <div>
-      <a class="brand" href={url('/')}>
-        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-          <rect x="4" y="4" width="56" height="56" stroke="#e4e4e4" />
-          <path d="M20 46 L32 18 L44 46" />
-          <path d="M25 36 H39" />
-        </svg>
-        <span class="brand-name">{site.name}</span>
-        <span class="brand-sub">{site.tagline}</span>
-      </a>
-
-      <nav class="nav" aria-label="Main">
-        {nav.slice(0, 3).map((item) => <a href={url(item.href)} data-hash={item.hash}>{item.label}</a>)}
-        <a href={url('/projects')}>Portfolio</a>
-        {nav.slice(3).map((item) => <a href={url(item.href)} data-hash={item.hash}>{item.label}</a>)}
-      </nav>
-    </div>
-
-    <div class="rail-foot">
-      {site.street}<br />
-      {site.city}<br />
-      <a href={`mailto:${site.email}`}>{site.email}</a><br />
-      {site.phone}
-    </div>
-  </aside>
+  <Rail />
 
   <main class="main" id="main" tabindex="-1">
     <section class="block" id="inicio">
@@ -72,7 +48,7 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
         </div>
       </div>
 
-      <figure class="hero-media" data-reveal>
+      <figure class="hero-media">
         <img
           src={url(`/portfolio/${heroShot.slug}-1600.webp`)}
           srcset={srcset(heroShot.slug)}
