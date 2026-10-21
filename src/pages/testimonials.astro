@@ -125,6 +125,8 @@ const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
   <footer class="foot">
     <span>© {new Date().getFullYear()} {site.name} · {site.tagline}</span>
     <span class="social">
+      <a href={url('/legal')}>Legal</a>
+      <a href={url('/privacy')}>Privacy</a>
       <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>
       <a href={waLink} target="_blank" rel="noopener">WhatsApp</a>
     </span>

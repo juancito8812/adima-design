@@ -588,3 +588,99 @@ textarea { resize: vertical; }
   margin: 0;
 }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+/* ---------- Páginas de texto (legal / privacidad) ---------- */
+.doc {
+  max-width: 68ch;
+  margin-top: 2.2rem;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+.doc-lead {
+  max-width: 60ch;
+  margin: 1.1rem 0 0;
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.doc h2 {
+  font-size: 0.82rem;
+  letter-spacing: var(--track);
+  margin: 2.6rem 0 0.9rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 2rem;
+}
+.doc h2:first-child { margin-top: 1.4rem; }
+.doc p { margin: 0 0 1.15rem; }
+.doc ul { list-style: none; padding: 0; margin: 0 0 1.2rem; }
+.doc ul li { position: relative; padding-left: 1.1rem; margin-bottom: 0.7rem; }
+.doc ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 6px;
+  height: 1px;
+  background: var(--accent);
+}
+.doc strong { font-weight: 600; }
+.doc em { font-style: italic; }
+.doc a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+}
+.doc a:hover { text-decoration-color: var(--accent); }
+.doc abbr { text-decoration: none; border-bottom: 1px dotted var(--ink-soft); }
+.doc-summary li { font-size: 0.9375rem; }
+
+/* Tabla de datos de la empresa */
+.doc-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1px;
+  margin: 0 0 1.6rem;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.doc-facts > div { background: var(--bg); padding: 0.9rem 1rem; }
+.doc-facts dt {
+  font-size: 0.6875rem;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.35rem;
+}
+.doc-facts dd { margin: 0; font-size: 0.875rem; line-height: 1.5; }
+
+/* Tarjetas de compromisos */
+.doc-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+  gap: 1.2rem 1.6rem;
+}
+.doc-cards li {
+  padding: 0.9rem 0 0;
+  border-top: 1px solid var(--line);
+  margin: 0;
+}
+.doc-cards li::before { display: none; }
+.doc-cards li strong {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+.doc-cards li span { font-size: 0.875rem; line-height: 1.55; color: var(--ink-soft); }
+
+.doc-updated {
+  margin-top: 2.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+.doc-note { font-size: 0.75rem; color: var(--ink-soft); }

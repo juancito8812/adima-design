@@ -1,0 +1,180 @@
+---
+import DocPage from '../components/DocPage.astro';
+import { legal, site } from '../config';
+---
+
+<DocPage
+  title={`Privacy notice — ${site.name}`}
+  description="What Adima Design LLC collects when you request a quote in Miami, how we use project photos and testimonials, who we share data with, and how to access, correct or delete your information."
+  eyebrow="Privacy"
+  heading="Your data, in as few words as possible."
+  lead="We collect what we need to quote and build your project, and nothing else. We do not sell personal data, we do not run advertising trackers, and this site sets no cookies of its own."
+  active="privacy"
+>
+  <h2 id="short">The short version</h2>
+  <ul class="doc-summary">
+    <li><strong>No trackers.</strong> No analytics scripts, no advertising pixels, no cookies from us.</li>
+    <li><strong>No selling.</strong> We never sell, rent or trade your personal data.</li>
+    <li><strong>No forms that store.</strong> The quote form builds a WhatsApp or email message on your own device — it does not post to a server of ours.</li>
+    <li><strong>Photos with permission.</strong> Your space only appears in our portfolio if you say yes, and you can withdraw that at any time.</li>
+    <li><strong>One inbox, one deletion.</strong> Ask {site.email} and we will delete or correct what we hold.</li>
+  </ul>
+
+  <h2 id="who">1. Who is responsible</h2>
+  <p>
+    {legal.entity} ({legal.entityType}) is the data controller for the information described here.
+    Address: {site.street}, {site.city}. Email: <a href={`mailto:${site.email}`}>{site.email}</a>.
+    Phone and WhatsApp: <a href={site.social.whatsapp} target="_blank" rel="noopener">{site.phone}</a>.
+    We work in Miami-Dade and Broward Counties, Florida.
+  </p>
+
+  <h2 id="collect">2. What we collect</h2>
+  <ul>
+    <li>
+      <strong>What you send us.</strong> Name, phone number, email, project address, room type,
+      rough square footage, timeline, budget indication, and any photos or drawings you share to get
+      a quote. If you become a client: contract details, payment records and site access notes.
+    </li>
+    <li>
+      <strong>Messages.</strong> The content of chats on WhatsApp, Instagram direct messages, SMS
+      and email — including attachments — kept so we can answer questions and remember what was
+      agreed.
+    </li>
+    <li>
+      <strong>Testimonials and project photos.</strong> Only what you approve, described in
+      sections 5 and 6.
+    </li>
+    <li>
+      <strong>Technical data.</strong> Our host (GitHub Pages) and our domain provider log the IP
+      address, browser and page requested when a page is served. We do not combine those logs with
+      your identity and we do not use them to profile you.
+    </li>
+    <li>
+      <strong>What we do not collect.</strong> No card numbers — payments go through our bank or
+      transfer and we only keep the confirmation. No government ID copies unless a permit or a gate
+      requires it, and then only for that purpose. No biometric data. Nothing from children.
+    </li>
+  </ul>
+
+  <h2 id="why">3. Why we use it, and on what basis</h2>
+  <ul>
+    <li><strong>To answer you and quote</strong> — before any contract, on the basis of your request (pre-contractual steps).</li>
+    <li><strong>To perform the job</strong> — scheduling, materials, access, invoicing, warranty (contract).</li>
+    <li><strong>To run a business legally</strong> — accounting, taxes, insurance, permits, lien documents (legal obligation and legitimate interest).</li>
+    <li><strong>To show our work</strong> — portfolio photos and testimonials, only with your consent.</li>
+    <li><strong>To improve</strong> — reading which services people ask about most, using aggregate counts, not individual tracking (legitimate interest).</li>
+  </ul>
+
+  <h2 id="share">4. Who we share it with</h2>
+  <p>We share the minimum necessary, and never for anyone else's marketing:</p>
+  <ul>
+    <li><strong>Meta / WhatsApp and Instagram</strong> — when you choose to message us there, that conversation is processed by Meta under its own terms. We do not import your contacts or sync your profile.</li>
+    <li><strong>Google Fonts</strong> — the page loads the Inter typeface from Google's servers, which receive your IP address. No account or identifier is attached.</li>
+    <li><strong>GitHub Pages</strong> — hosts this site and keeps standard access logs.</li>
+    <li><strong>Our accountant, bank and insurer</strong> — invoicing and coverage only.</li>
+    <li><strong>Subcontractors and suppliers</strong> — the project address and scope, under a confidentiality obligation.</li>
+    <li><strong>Authorities</strong> — when a permit, a lien, a court order or a legal obligation requires it.</li>
+  </ul>
+  <p>We do not transfer personal data to third parties for cross-context behavioral advertising.</p>
+
+  <h2 id="photos">5. Photos of your property</h2>
+  <p>
+    During a job we photograph the space for progress records, quality control and warranty
+    evidence. Those internal photos stay with the project file. Publishing a photo in our portfolio,
+    on Instagram or in an ad requires your separate, specific permission — and if you would rather
+    the address and any personal objects never appear, we frame and retouch the shots accordingly.
+    Withdrawing permission stops future use; we will also remove published images on request within
+    a reasonable time, except where a third party has already reshared them.
+  </p>
+
+  <h2 id="testimonials">6. Testimonials</h2>
+  <p>
+    If you send a testimonial we ask whether we may publish it, and whether we may use your first
+    name and the project type. We publish it as written: we do not invent reviews, we do not pay
+    for them, and we do not hide negative ones — the FTC rule on consumer reviews (16 C.F.R. Part
+    465) requires exactly that, and it is also how we prefer to work. You can ask us to take yours
+    down at any time by emailing <a href={`mailto:${site.email}`}>{site.email}</a>.
+  </p>
+
+  <h2 id="cookies">7. Cookies and local storage</h2>
+  <p>
+    This site sets no cookies and no tracking pixels. The only thing stored in your browser is a
+    purely functional preference for the menu animation; it carries no identifier. Embedded content
+    from Instagram or WhatsApp appears only as a link, so nothing loads until you click. If we ever
+    add analytics, this page will name the tool and offer an opt-out before it goes live.
+  </p>
+
+  <h2 id="retention">8. How long we keep it</h2>
+  <ul>
+    <li><strong>Quotes that did not become jobs:</strong> 24 months, then deleted.</li>
+    <li><strong>Client project files:</strong> 7 years after completion — accounting, warranty and insurance requirements.</li>
+    <li><strong>Chat threads:</strong> 24 months after the last message, unless part of a project file.</li>
+    <li><strong>Testimonials and published photos:</strong> until you withdraw permission.</li>
+  </ul>
+
+  <h2 id="rights">9. Your rights</h2>
+  <p>
+    Wherever you live, you can ask us to: confirm what we hold, give you a copy, correct it, delete
+    it, stop using it for a specific purpose, or stop sending you anything. Write to{' '}
+    <a href={`mailto:${site.email}`}>{site.email}</a> with "privacy request" in the subject. We
+    reply within 30 days, and we do not charge for it. We may ask one clarifying question to make
+    sure we are talking to the right person, but we will not demand a passport scan for a deletion
+    request.
+  </p>
+  <ul>
+    <li>
+      <strong>Florida.</strong> Under the Florida Information Protection Act (F.S. 501.171) we
+      notify affected people within 30 days of discovering a breach of security involving their
+      personal information, and we notify the Department of Legal Affairs when the law requires it.
+      We do not sell personal data or process it for targeted advertising, which is the conduct the
+      Florida Digital Bill of Rights (F.S. 501.701–501.72) regulates — we honor access, correction
+      and deletion requests regardless.
+    </li>
+    <li>
+      <strong>California.</strong> You have the rights to know, delete, correct and opt out of sale
+      or sharing under the CCPA/CPRA. We do not sell or share personal information as those terms
+      are defined, and we will not discriminate against you for exercising a right.
+    </li>
+    <li>
+      <strong>EU / UK visitors.</strong> Where the GDPR or UK GDPR applies, you may also object to
+      processing based on legitimate interests, ask for portability, and lodge a complaint with your
+      local supervisory authority. Our legal bases are listed in section 3.
+    </li>
+  </ul>
+
+  <h2 id="security">10. Security</h2>
+  <p>
+    Data lives in our own devices and accounts with two-factor authentication, encrypted disks where
+    available, and access limited to the people on your job. Paper contracts are kept locked. We
+    keep the amount of personal data we hold deliberately small, which is the most effective
+    protection there is. No system is perfect; if something goes wrong, section 9 explains how we
+    tell you.
+  </p>
+
+  <h2 id="children">11. Children</h2>
+  <p>
+    Our services are for adults. We do not knowingly collect information from anyone under 13. If a
+    child's information reaches us — for example in a photo you share — tell us and we remove it.
+  </p>
+
+  <h2 id="changes">12. Changes to this notice</h2>
+  <p>
+    If our practices change, this page changes with them and the date below moves. Material changes
+    affecting existing clients are also sent by email. Earlier versions are available on request.
+  </p>
+
+  <h2 id="contact">13. Contact</h2>
+  <p>
+    {legal.entity} · {site.street}, {site.city}<br />
+    <a href={`mailto:${site.email}`}>{site.email}</a> · <a href={site.social.whatsapp} target="_blank" rel="noopener">{site.phone}</a>
+  </p>
+
+  <p class="doc-updated">
+    Last updated {legal.updated}. See also <a href="../legal/">Licensing, permits and consumer rights</a>.
+  </p>
+
+  <p class="doc-note">
+    Plain-language summary, not legal advice to you. Statute references are to the 2024 Florida
+    Statutes.
+  </p>
+</DocPage>
