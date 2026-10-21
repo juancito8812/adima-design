@@ -1,0 +1,108 @@
+---
+import Rail from '../../components/Rail.astro';
+import Base from '../../layouts/Base.astro';
+import { site, url } from '../../config';
+import { articles } from '../../journal';
+
+export function getStaticPaths() {
+  return articles.map((article, i) => ({
+    params: { slug: article.slug },
+    props: { article, prev: articles[i - 1] ?? articles[articles.length - 1], next: articles[i + 1] ?? articles[0] },
+  }));
+}
+
+const { article, prev, next } = Astro.props;
+
+const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
+  `Hi Adima Design, I read "${article.title}" and would like a quote.`
+)}`;
+
+const esc = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/** The brochure bullets arrive as "Label: explanation" — bold the label. */
+const bullet = (item: string) => {
+  const safe = esc(item);
+  const m = safe.match(/^([^:.]{2,48}):\s+(.*)$/);
+  return m ? `<strong>${m[1]}:</strong> ${m[2]}` : safe;
+};
+---
+
+<Base
+  title={`${article.title} — ${site.name}`}
+  description={article.lede.slice(0, 155)}
+  active="journal"
+>
+  <Rail />
+
+  <main class="main" id="main" tabindex="-1">
+    <article>
+      <section class="block">
+        <p class="eyebrow">
+          <a href={url('/journal')}>Journal</a> · {article.kicker}
+        </p>
+        <h1>{article.title}</h1>
+        <p class="big doc-lead">{article.lede}</p>
+
+        <figure class="hero-shot">
+          <img
+            src={url(`/journal/${article.image}.webp`)}
+            width="1024"
+            height="576"
+            alt={article.imageAlt}
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
+      </section>
+
+      <section class="block">
+        <div class="doc">
+          {
+            article.blocks.map((b) => {
+              if (b.type === 'h2') return <h2>{b.text}</h2>;
+              if (b.type === 'h3') return <h3>{b.text}</h3>;
+              if (b.type === 'p') return <p>{b.text}</p>;
+              return (
+                <ul>
+                  {b.items.map((item) => (
+                    <li set:html={bullet(item)} />
+                  ))}
+                </ul>
+              );
+            })
+          }
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="journal-next">
+          <a href={url(`/journal/${prev.slug}`)}>
+            <span class="eyebrow">Previous</span>
+            {prev.title}
+          </a>
+          <a class="to-right" href={url(`/journal/${next.slug}`)}>
+            <span class="eyebrow">Next</span>
+            {next.title}
+          </a>
+        </div>
+        <div class="intro-links">
+          <a class="submit" href={waLink} target="_blank" rel="noopener">
+            Ask about this finish →
+          </a>
+          <a class="link-more" href={url('/projects')}>See it applied →</a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <span>© {new Date().getFullYear()} {site.name} · {site.tagline}</span>
+    <span class="social">
+      <a href={url('/journal')}>Journal</a>
+      <a href={url('/legal')}>Legal</a>
+      <a href={url('/privacy')}>Privacy</a>
+      <a href={waLink} target="_blank" rel="noopener">WhatsApp</a>
+    </span>
+  </footer>
+</Base>
