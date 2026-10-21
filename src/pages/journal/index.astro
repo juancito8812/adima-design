@@ -1,0 +1,85 @@
+---
+import Rail from '../../components/Rail.astro';
+import Base from '../../layouts/Base.astro';
+import { site, url } from '../../config';
+import { articles, mission } from '../../journal';
+
+const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
+  'Hi Adima Design, I read your journal and would like a quote for my space.'
+)}`;
+
+---
+
+<Base
+  title={`Journal — ${site.name}`}
+  description={`Notes from the ${site.name} studio: epoxy resin, venetian plaster, microcement and marmorino finishes explained by the team that applies them across South Florida.`}
+  active="journal"
+>
+  <Rail />
+
+  <main class="main" id="main" tabindex="-1">
+    <section class="block" id="journal-intro">
+      <p class="eyebrow">Journal</p>
+      <h1>Notes from the studio.</h1>
+      <div class="intro" style="margin-top:2rem">
+        <p class="big">
+          Epoxy resin, venetian plaster, microcement and marmorino — what each finish is, how it is
+          applied by hand, and where it belongs in your home or business.
+        </p>
+        <p>
+          Written for clients in Miami, Doral, Hialeah and Fort Lauderdale who are choosing a finish
+          and want the details before the first site visit.
+        </p>
+      </div>
+    </section>
+
+    <section class="block" id="articulos">
+      <div class="journal-grid">
+        {articles.map((a) => (
+          <article class="journal-card">
+            <a class="journal-media" href={url(`/journal/${a.slug}`)}>
+              <img
+                src={url(`/journal/${a.image}.webp`)}
+                width="1024"
+                height="576"
+                alt={a.imageAlt}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <p class="eyebrow">{a.kicker}</p>
+            <h2>
+              <a href={url(`/journal/${a.slug}`)}>{a.title}</a>
+            </h2>
+            <p>{a.lede}</p>
+            <a class="link-more" href={url(`/journal/${a.slug}`)}>Read the article →</a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="block" id="estudio">
+      <p class="eyebrow">Our mission</p>
+      <p class="journal-mission">{mission}</p>
+    </section>
+
+    <section class="block" id="contacto">
+      <p class="eyebrow">Next step</p>
+      <h2>Tell us the room, we will tell you the finish.</h2>
+      <div class="intro-links">
+        <a class="submit" href={waLink} target="_blank" rel="noopener">Request a quote →</a>
+        <a class="link-more" href={url('/#contacto')}>Book a site visit →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>© {new Date().getFullYear()} {site.name} · {site.tagline}</span>
+    <span class="social">
+      <a href={url('/legal')}>Legal</a>
+      <a href={url('/privacy')}>Privacy</a>
+      <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>
+      <a href={waLink} target="_blank" rel="noopener">WhatsApp</a>
+    </span>
+  </footer>
+</Base>

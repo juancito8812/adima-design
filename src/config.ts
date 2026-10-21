@@ -94,6 +94,7 @@ export const nav = [
   { label: 'Portfolio', href: '/projects', hash: '' },
   { label: 'Studio', href: '/#estudio', hash: 'estudio' },
   { label: 'Testimonials', href: '/testimonials', hash: '' },
+  { label: 'Journal', href: '/journal', hash: '' },
   { label: 'Contact', href: '/#contacto', hash: 'contacto' },
 ];
 
