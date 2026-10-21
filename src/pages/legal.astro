@@ -1,6 +1,6 @@
 ---
 import DocPage from '../components/DocPage.astro';
-import { commitments, legal, site } from '../config';
+import { commitments, legal, site, url } from '../config';
 
 const cards = commitments;
 
@@ -185,7 +185,7 @@ const facts = [
 
   <p class="doc-updated">
     Last updated {legal.updated}. Questions about this page: <a href={`mailto:${site.email}`}>{site.email}</a>.
-    See also our <a href="../privacy/">Privacy notice</a>.
+    See also our <a href={url('/privacy')}>Privacy notice</a>.
   </p>
 
   <p class="doc-note">
