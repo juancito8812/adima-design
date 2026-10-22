@@ -1,442 +1,224 @@
 ---
-import Rail from '../components/Rail.astro';
-import Base from '../layouts/Base.astro';
-import Icon from '../components/Icon.astro';
-import { site, url, stats, services, about, process, portfolio, founder, distinction, reviews, reviewsUrl, commitments } from '../config';
-
-const srcset = (slug: string) =>
-  [480, 960, 1600].map((w) => `${url(`/portfolio/${slug}-${w}.webp`)} ${w}w`).join(', ');
+import Kobu from '../layouts/Kobu.astro';
+import {
+  site,
+  url,
+  services,
+  about,
+  process,
+  portfolio,
+  distinction,
+  commitments,
+} from '../config';
 
 const bySlug = (slug: string) => portfolio.find((p) => p.slug === slug)!;
-const featured = [
-  'univista-lobby',
-  'pool-fire-feature',
-  'marble-bathroom',
-  'marble-hallway',
-  'epoxy-living-room',
-  'univista-reception',
-].map(bySlug);
-const heroShot = bySlug('univista-lobby');
-const studyShots = [bySlug('brand-cube'), bySlug('univista-application')];
+const srcset = (slug: string) =>
+  [480, 960, 1600].map((w) => `${url(`/portfolio/${slug}-${w}.webp`)} ${w}w`).join(', ');
 
 const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
   'Hi Adima Design, I would like a quote for a project.'
 )}`;
+
+const hero = bySlug('panel-wall');
+
+/** Collage asimétrico: primera pieza ancha con etiqueta FEATURED. */
+const work = [
+  { slug: 'univista-lobby', wide: true, badge: 'Featured', offset: false },
+  { slug: 'marble-bathroom', wide: false, badge: null, offset: false },
+  { slug: 'panel-wall', wide: false, badge: null, offset: true },
+  { slug: 'epoxy-living-room', wide: false, badge: 'New', offset: false },
+  { slug: 'pool-fire-feature', wide: false, badge: null, offset: true },
+  { slug: 'marble-hallway', wide: false, badge: null, offset: false },
+].map((w) => ({ ...w, p: bySlug(w.slug) }));
 ---
 
-<Base>
-  <Rail />
+<Kobu active="home">
+  <main class="kpage" id="main" tabindex="-1">
+    <!-- Wordmark gigante: la marca es el hero, no un logo en una esquina -->
+    <section class="khero" id="inicio">
+      <div class="wrap">
+        <div class="khero-eyebrow">
+          <span class="mono">Interior finishes · Est. Hollywood, FL</span>
+          <span class="mono mono-ash">{site.serviceArea}</span>
+        </div>
 
-  <main class="main" id="main" tabindex="-1">
-    <section class="block" id="inicio">
-      <p class="eyebrow">Interior finishes · {site.serviceArea}</p>
-      <h1>Surfaces with depth, applied layer by layer.</h1>
-      <div class="intro" style="margin-top:2rem" data-reveal>
-        <p class="big">
-          Adima Design creates captivating environments for your home or business: Venetian
-          plaster, microcement, Marmorino and epoxy resin. Residential, commercial and renovation
-          projects across South Florida.
-        </p>
-        <p>
-          Every finish is customized to your aesthetic and applied by hand, layer by layer, with
-          durable, high-quality, environmentally friendly materials. Experience the difference of
-          exquisite craftsmanship that reflects your personality and enhances your surroundings.
-        </p>
-        <div class="intro-links">
-          <a class="link-more" href={url('/#servicios')}>Services</a>
-          <a class="link-more" href={url('/#contacto')}>Request a quote</a>
+        <h1 class="wordmark">ADIMA</h1>
+        <hr class="khero-rule" />
+
+        <div class="khero-copy">
+          <h2>Venetian plaster, microcement and epoxy — applied by hand, layer by layer.</h2>
+          <div>
+            <p>
+              A South Florida studio working on walls, floors and ceilings for homes, offices and
+              hospitality. Lime, marble dust and mineral pigments; sample boards approved before the
+              first coat.
+            </p>
+            <div class="meta">
+              <span class="mono mono-ash">01 — Microcement</span>
+              <span class="mono mono-ash">02 — Venetian plaster</span>
+              <span class="mono mono-ash">03 — Epoxy</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <figure class="hero-media">
+      <figure class="kfigure">
         <img
-          src={url(`/portfolio/${heroShot.slug}-1600.webp`)}
-          srcset={srcset(heroShot.slug)}
-          sizes="(max-width: 980px) 100vw, 78vw"
-          width={heroShot.w}
-          height={heroShot.h}
-          alt={`${heroShot.title} — ${heroShot.finish}, ${heroShot.place}`}
+          src={url(`/portfolio/${hero.slug}-1600.webp`)}
+          srcset={srcset(hero.slug)}
+          sizes="100vw"
+          width="1600"
+          height="1200"
+          alt={`${hero.title} — ${hero.finish}`}
           loading="eager"
-          fetchpriority="high"
           decoding="async"
         />
-        <figcaption>{heroShot.title} · {heroShot.finish} · {heroShot.place}</figcaption>
+        <span class="badge">In progress · Doral</span>
       </figure>
+      <div class="wrap kfigcap">
+        <span class="mono mono-ash">{hero.title} — {hero.finish}</span>
+        <span class="mono mono-ash">{hero.place}</span>
+      </div>
     </section>
 
-    <section class="block" id="servicios">
-      <p class="eyebrow">Services</p>
-      <h2 data-reveal>Finishes that change how a room feels</h2>
-      <div class="services" style="margin-top:2.6rem" data-reveal>
-        {services.map((s) => (
-          <article class="service">
-            <div class="service-head">
-              <Icon name={s.icon} size={58} />
-              <span>{s.title}</span>
-            </div>
-            <ul>
-              {s.items.map((item) => <li>{item}</li>)}
-            </ul>
-          </article>
-        ))}
-      </div>
-
-      <div class="distinction" data-reveal>
-        <div class="distinction-head">
-          <p class="eyebrow">{distinction.eyebrow}</p>
-          <h3>{distinction.title}</h3>
+    <!-- Trabajos seleccionados: collage editorial -->
+    <section class="ksec" id="proyectos">
+      <div class="wrap">
+        <div class="ksec-head">
+          <h2>Selected surfaces</h2>
+          <a class="link-more" href={url('/projects')}>All work ↗</a>
         </div>
-        <div class="distinction-body">
+
+        <div class="collage">
+          {work.map((w) => (
+            <article class={`proj${w.wide ? ' wide' : ''}${w.offset ? ' offset' : ''}`}>
+              <a href={url('/projects')}>
+                <figure>
+                  <img
+                    src={url(`/portfolio/${w.p.slug}-960.webp`)}
+                    srcset={srcset(w.p.slug)}
+                    sizes={w.wide ? '(max-width: 900px) 100vw, 800px' : '(max-width: 900px) 50vw, 400px'}
+                    width="960"
+                    height="720"
+                    alt={`${w.p.title} — ${w.p.finish}`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {w.badge && <span class="badge">{w.badge}</span>}
+                </figure>
+                <p class="proj-title">{w.p.title}</p>
+                <div class="proj-meta">
+                  <span class="mono mono-sm mono-ash">{w.p.finish}</span>
+                  <span class="mono mono-sm">{w.p.place}</span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Servicios como filas tipográficas, sin tarjetas -->
+    <section class="ksec" id="servicios">
+      <div class="wrap">
+        <div class="ksec-head">
+          <h2>Techniques</h2>
+          <span class="mono mono-ash">Three families · one standard</span>
+        </div>
+
+        <div class="rows">
+          {services.map((s, i) => (
+            <article class="row">
+              <span class="mono mono-ash">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{s.title}</h3>
+              <ul>
+                {s.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Estudio -->
+    <section class="ksec" id="estudio">
+      <div class="wrap kstudio">
+        <figure>
+          <img
+            src={url('/portfolio/texture-limewash-960.webp')}
+            srcset={srcset('texture-limewash')}
+            sizes="(max-width: 900px) 100vw, 520px"
+            width="960"
+            height="720"
+            alt="Limewash brushed finish sample"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <div>
+          <p class="mono mono-ash" style="margin-bottom:.9rem">{distinction.eyebrow}</p>
+          <h2>{distinction.title}</h2>
+          <p>{about[0]}</p>
           <p>{distinction.text}</p>
-          <ul class="distinction-items">
-            {distinction.items.map((item) => (
-              <li>
-                <b>{item.title}</b>
-                <span>{item.text}</span>
-              </li>
+          <ul class="tags">
+            {distinction.items.map((i) => (
+              <li class="badge" style="position:static">{i.title}</li>
+            ))}
+            {commitments.slice(0, 2).map((c) => (
+              <li class="badge" style="position:static">{c.title}</li>
             ))}
           </ul>
         </div>
       </div>
     </section>
 
-    <section class="block" id="proyectos">
-      <p class="eyebrow">Projects</p>
-      <h2 data-reveal>Recent work</h2>
-      <div class="projects" style="margin-top:2.6rem" data-reveal>
-        {featured.map((p) => (
-          <a class="project" href={url('/projects')}>
-            <figure>
-              <figcaption>
-                <h3>{p.title}</h3>
-                <span class="meta">{p.finish} · {p.place}</span>
-              </figcaption>
-              <img
-                src={url(`/portfolio/${p.slug}-960.webp`)}
-                srcset={srcset(p.slug)}
-                sizes="(max-width: 560px) 92vw, (max-width: 900px) 45vw, 30vw"
-                width={p.w}
-                height={p.h}
-                alt={`${p.title} — ${p.finish}, ${p.place}`}
-                loading="lazy"
-                decoding="async"
-              />
-            </figure>
-          </a>
-        ))}
-      </div>
-      <div class="intro-links" style="margin-top:2.4rem">
-        <a class="link-more" href={url('/projects')}>Full portfolio · {portfolio.length} projects</a>
-      </div>
-    </section>
-
-    <section class="block" id="estudio">
-      <p class="eyebrow">Studio</p>
-      <h2 data-reveal>A craft method, not a guess</h2>
-
-      <div class="study" style="margin-top:2.6rem" data-reveal>
-        <div class="study-text">
-          {about.map((paragraph) => <p>{paragraph}</p>)}
-          <div class="facts">
-            {stats.map((s) => (
-              <div>
-                <strong>{s.value}</strong>
-                <span>{s.label}</span>
-              </div>
-            ))}
-          </div>
-          <figure class="founder">
-            <blockquote>{founder.quote}</blockquote>
-            <figcaption>{founder.name} · {founder.role}</figcaption>
-          </figure>
+    <!-- Proceso -->
+    <section class="ksec" id="proceso">
+      <div class="wrap">
+        <div class="ksec-head">
+          <h2>Method</h2>
+          <span class="mono mono-ash">Written scope before the first coat</span>
         </div>
-
-        <div class="study-media">
-          <figure>
-            <img
-              src={url(`/portfolio/${studyShots[1].slug}-960.webp`)}
-              srcset={srcset(studyShots[1].slug)}
-              sizes="(max-width: 980px) 92vw, 42vw"
-              width={studyShots[1].w}
-              height={studyShots[1].h}
-              alt={`${studyShots[1].title} — ${studyShots[1].finish}`}
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>On-site application and sheen check</figcaption>
-          </figure>
-          <figure>
-            <img
-              src={url(`/portfolio/${studyShots[0].slug}-960.webp`)}
-              srcset={srcset(studyShots[0].slug)}
-              sizes="(max-width: 980px) 92vw, 42vw"
-              width={studyShots[0].w}
-              height={studyShots[0].h}
-              alt={`${studyShots[0].title} — ${studyShots[0].finish}`}
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>Finish sample before the job starts</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <div class="process" data-reveal>
-        {process.map((p) => (
-          <div>
-            <b>{p.step}</b>
-            <h3>{p.title}</h3>
-            <p>{p.text}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    {reviews.length > 0 && (
-      <section class="block" id="testimonials">
-        <p class="eyebrow">Client testimonials</p>
-        <h2 data-reveal>In their words</h2>
-
-        <div class="reviews" style="margin-top:2.6rem" data-reveal>
-          {reviews.map((r) => (
-            <figure>
-              <blockquote>{r.quote}</blockquote>
-              <figcaption>
-                <span class="who">{r.name}</span>
-                <span class="meta">{r.detail}</span>
-              </figcaption>
-            </figure>
+        <div class="ksteps">
+          {process.map((p) => (
+            <article class="kstep">
+              <span class="mono mono-ash">{p.step}</span>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </article>
           ))}
         </div>
-
-        <p class="reviews-link">
-          <a href={url('/testimonials')}>Worked with us? Leave your testimonial →</a>
-          {reviewsUrl && (
-            <>
-              {' · '}
-              <a href={reviewsUrl} target="_blank" rel="noopener">See all reviews on Google</a>
-            </>
-          )}
-        </p>
-      </section>
-    )}
-
-    <section class="block" id="trust">
-      <p class="eyebrow">Licensing & consumer protection</p>
-      <h2 data-reveal>Construction rules, on your side</h2>
-      <p class="doc-lead" data-reveal>
-        Decorative finishes are construction work in Florida — licensing, written contracts, permits
-        and lien notices apply. Here is what we commit to in writing, before you pay anything.
-      </p>
-
-      <ul class="doc-cards" style="margin-top:2.4rem" data-reveal>
-        {commitments.map((c) => (
-          <li>
-            <strong>{c.title}</strong>
-            <span>{c.text}</span>
-          </li>
-        ))}
-      </ul>
-
-      <p class="reviews-link">
-        <a href={url('/legal')}>Licensing, permits and your consumer rights →</a>
-        {' · '}
-        <a href={url('/privacy')}>Privacy notice →</a>
-      </p>
-    </section>
-
-    <section class="block" id="contacto">
-      <p class="eyebrow">Contact</p>
-      <h2 data-reveal>Tell us about your space</h2>
-
-      <div class="contact" style="margin-top:2.6rem" data-reveal>
-        <div>
-          <dl class="dl">
-            <div><dt>Phone</dt><dd><a href={`tel:+${site.whatsapp}`}>{site.phone}</a></dd></div>
-            <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
-            <div><dt>Instagram</dt><dd><a href={site.social.instagram} target="_blank" rel="noopener">@adima.design</a></dd></div>
-            <div><dt>Studio</dt><dd>{site.street}<br />{site.city}</dd></div>
-            <div><dt>Hours</dt><dd>{site.hours}</dd></div>
-          </dl>
-        </div>
-
-        <form id="contact-form" novalidate data-wa={site.social.whatsapp} data-email={site.email}>
-          <label class="field">
-            <span>Full name</span>
-            <input type="text" name="name" autocomplete="name" required minlength="2" aria-describedby="err-name" />
-            <span class="field-error" id="err-name" hidden>Please enter your name.</span>
-          </label>
-          <label class="field">
-            <span>Phone or email</span>
-            <input type="text" name="contact" autocomplete="tel" required minlength="5" aria-describedby="err-contact" />
-            <span class="field-error" id="err-contact" hidden>Add a phone or email so we can reply.</span>
-          </label>
-          <label class="field">
-            <span>Project type</span>
-            <select name="type">
-              <option value="">Select an option</option>
-              <option>Venetian plaster</option>
-              <option>Microcement</option>
-              <option>Marmorino</option>
-              <option>Epoxy resin</option>
-              <option>Renovation</option>
-              <option>Commercial space</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>Project details</span>
-            <textarea name="message" rows="4" placeholder="Room, approximate square footage, timing…"></textarea>
-          </label>
-          <button class="submit" type="submit">Send request</button>
-          <p class="form-alt">
-            Opens WhatsApp with your details already written — or <a href="#" id="email-fallback">send it by email</a>.
-          </p>
-          <p id="form-status" role="status" aria-live="polite" style="display:none"></p>
-        </form>
       </div>
     </section>
+
+    <!-- Contacto -->
+    <section class="kcontact wrap" id="contacto">
+      <div>
+        <h2>Tell us the room, we will tell you the finish.</h2>
+        <p>{site.street} · {site.city} · {site.hours}</p>
+      </div>
+      <dl>
+        <div>
+          <dt>Phone</dt>
+          <dd><a href={`tel:+${site.whatsapp}`}>{site.phone}</a></dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+        </div>
+      </dl>
+      <dl>
+        <div>
+          <dt>WhatsApp</dt>
+          <dd><a href={waLink} target="_blank" rel="noopener">Message the studio ↗</a></dd>
+        </div>
+        <div>
+          <dt>Instagram</dt>
+          <dd><a href={site.social.instagram} target="_blank" rel="noopener">@adima.design ↗</a></dd>
+        </div>
+      </dl>
+    </section>
   </main>
-
-  <footer class="foot">
-    <span>© {new Date().getFullYear()} {site.name} · {site.tagline}</span>
-    <span class="social">
-      <a href={url('/legal')}>Legal</a>
-      <a href={url('/privacy')}>Privacy</a>
-      <a href={site.social.instagram} target="_blank" rel="noopener">
-        <Icon name="instagram" size={26} />Instagram
-      </a>
-      <a href={waLink} target="_blank" rel="noopener">
-        <Icon name="whatsapp" size={26} />WhatsApp
-      </a>
-      <a href={`mailto:${site.email}`}><Icon name="mail" size={26} />Email</a>
-    </span>
-  </footer>
-
-  <script>
-    document.documentElement.classList.add('js');
-
-    // Reveal on scroll, staggered per group. Skipped when the user prefers less motion.
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const revealables = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
-    if (!reduce && 'IntersectionObserver' in window) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            const el = entry.target as HTMLElement;
-            el.style.transitionDelay = `${(el.dataset.delay ?? '0')}ms`;
-            el.classList.add('is-in');
-            io.unobserve(el);
-          });
-        },
-        { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
-      );
-      revealables.forEach((el) => io.observe(el));
-    } else {
-      revealables.forEach((el) => el.classList.add('is-in'));
-    }
-  </script>
-
-  <script>
-    // Menu: highlights the visible section (same behaviour as the reference site).
-    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a'));
-    const sections = links
-      .map((link) => document.getElementById(link.dataset.hash ?? ''))
-      .filter((el): el is HTMLElement => Boolean(el));
-
-    const setActive = (id: string) => {
-      links.forEach((link) => {
-        if (link.dataset.hash === id) link.setAttribute('aria-current', 'true');
-        else link.removeAttribute('aria-current');
-      });
-    };
-
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const visible = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (visible?.target.id) setActive(visible.target.id);
-        },
-        { rootMargin: '-20% 0px -55% 0px', threshold: [0.05, 0.25, 0.5] }
-      );
-      sections.forEach((section) => observer.observe(section));
-    }
-
-    // Contact form: no backend needed — the filled-in brief goes straight to WhatsApp or email.
-    const form = document.getElementById('contact-form') as HTMLFormElement | null;
-    const status = document.getElementById('form-status') as HTMLElement | null;
-    const emailFallback = document.getElementById('email-fallback') as HTMLAnchorElement | null;
-
-    const field = (name: string) => form?.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null;
-
-    const readForm = () => ({
-      name: field('name')?.value.trim() ?? '',
-      contact: field('contact')?.value.trim() ?? '',
-      type: field('type')?.value ?? '',
-      message: field('message')?.value.trim() ?? '',
-    });
-
-    const brief = () => {
-      const data = readForm();
-      const lines = [
-        `New project request — ${document.title.split('—')[0].trim()}`,
-        '',
-        `Name: ${data.name}`,
-        `Contact: ${data.contact}`,
-        data.type ? `Project type: ${data.type}` : '',
-        data.message ? `Details: ${data.message}` : '',
-      ];
-      return lines.filter(Boolean).join('\n');
-    };
-
-    const validate = () => {
-      const data = readForm();
-      const checks: Array<[keyof typeof data, boolean]> = [
-        ['name', data.name.length >= 2],
-        ['contact', data.contact.length >= 5],
-      ];
-      let ok = true;
-      checks.forEach(([key, valid]) => {
-        const error = document.getElementById(`err-${key}`);
-        const input = field(key);
-        if (error) error.hidden = valid;
-        if (input) input.setAttribute('aria-invalid', valid ? 'false' : 'true');
-        if (!valid) ok = false;
-      });
-      return ok;
-    };
-
-    const showStatus = (text: string) => {
-      if (!status) return;
-      status.style.display = 'block';
-      status.textContent = text;
-    };
-
-    form?.addEventListener('submit', (event) => {
-      event.preventDefault();
-      if (!validate()) {
-        showStatus('Please complete the highlighted fields.');
-        return;
-      }
-      const base = (form.dataset.wa ?? '').split('?')[0];
-      const url = `${base}?text=${encodeURIComponent(brief())}`;
-      window.open(url, '_blank', 'noopener');
-      showStatus('WhatsApp is opening with your request — just press send.');
-    });
-
-    emailFallback?.addEventListener('click', (event) => {
-      event.preventDefault();
-      if (!validate()) {
-        showStatus('Please complete the highlighted fields.');
-        return;
-      }
-      const email = form?.dataset.email ?? '';
-      const subject = `Project request — ${readForm().name}`;
-      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief())}`;
-      showStatus('Your email app is opening with the request ready to send.');
-    });
-  </script>
-</Base>
+</Kobu>

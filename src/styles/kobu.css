@@ -1,0 +1,518 @@
+/* ==========================================================================
+   Adima Design — variante "Kobu" (rama diseno-kobu)
+   Gaceta editorial monocroma sobre papel cálido: lienzo pergamino, cabecera de
+   líneas capilares, wordmark gigante, etiquetas en mono espaciadas y fotografía
+   como único color. Sin sombras, sin rellenos de acento, radio máximo 5px.
+   ========================================================================== */
+
+:root {
+  --obsidian: #242429;
+  --parchment: #f9f5f2;
+  --gallery: #ffffff;
+  --ink: #000000;
+  --graphite: #3e3e3e;
+  --ash: #919191;
+  --deep: #070707;
+
+  --sans: 'Cabin', 'Gill Sans', 'Avenir', ui-sans-serif, system-ui, sans-serif;
+  --mono: 'Fira Mono', ui-monospace, 'JetBrains Mono', Menlo, monospace;
+
+  --page: 1440px;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --line: 1px solid var(--obsidian);
+}
+
+.kb,
+.kf,
+.kpage {
+  font-family: var(--sans);
+}
+
+.kpage {
+  background: var(--parchment);
+  color: var(--obsidian);
+  -webkit-font-smoothing: antialiased;
+}
+
+.kpage p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.43;
+  color: var(--graphite);
+}
+
+.kpage h1,
+.kpage h2,
+.kpage h3 {
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--obsidian);
+}
+
+/* Etiqueta monoespaciada — la única "voz" tipográfica del sistema. */
+.mono {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  line-height: 1.43;
+  letter-spacing: 0.167em;
+  text-transform: uppercase;
+  color: var(--obsidian);
+  font-feature-settings: 'tnum' on;
+}
+.mono-ash {
+  color: var(--ash);
+}
+.mono-sm {
+  font-size: 0.625rem;
+  letter-spacing: 0.183em;
+}
+
+.wrap {
+  width: min(100% - (var(--gutter) * 2), var(--page));
+  margin-inline: auto;
+}
+
+/* ---------- Cabecera ---------- */
+.kb {
+  border-bottom: var(--line);
+  background: var(--parchment);
+}
+.kb-in {
+  width: min(100% - (var(--gutter) * 2), var(--page));
+  margin-inline: auto;
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+.kb-links {
+  display: flex;
+  gap: clamp(0.9rem, 1.8vw, 1.8rem);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.kb-links a,
+.kb-right a {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.167em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--obsidian);
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+}
+.kb-links a:hover,
+.kb-right a:hover {
+  border-bottom-color: var(--obsidian);
+}
+.kb-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--obsidian);
+  justify-self: center;
+}
+.kb-mark svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+}
+.kb-mark span {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.kb-right {
+  justify-self: end;
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+/* ---------- Hero ---------- */
+.khero {
+  padding: clamp(2.5rem, 6vw, 5rem) 0 0;
+}
+.khero-eyebrow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.5rem;
+}
+.wordmark {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(4.2rem, 20.5vw, 19rem);
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  color: var(--deep);
+  margin: 0 0 1.5rem;
+  white-space: nowrap;
+}
+.khero-rule {
+  border: 0;
+  border-top: var(--line);
+  margin: 0;
+}
+.khero-copy {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding: 2.2rem 0 2.8rem;
+  align-items: start;
+}
+.khero-copy h2 {
+  font-size: clamp(1.5rem, 2.3vw, 2.0625rem);
+  line-height: 1.25;
+  max-width: 24ch;
+}
+.khero-copy p {
+  max-width: 480px;
+}
+.khero-copy .meta {
+  display: flex;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  margin-top: 1.6rem;
+}
+
+/* Foto full-bleed con etiqueta flotante */
+.kfigure {
+  position: relative;
+  margin: 0;
+}
+.kfigure img {
+  width: 100%;
+  height: clamp(340px, 62vh, 700px);
+  object-fit: cover;
+  display: block;
+}
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--gallery);
+  color: var(--obsidian);
+  border: var(--line);
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.183em;
+  text-transform: uppercase;
+}
+.badge::before {
+  content: '•';
+  font-size: 0.7rem;
+  line-height: 1;
+}
+.kfigcap {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 0 0;
+}
+
+/* ---------- Secciones ---------- */
+.ksec {
+  padding: clamp(2.4rem, 4.6vw, 3.6rem) 0;
+}
+.ksec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: var(--line);
+  margin-bottom: 2.2rem;
+  flex-wrap: wrap;
+}
+.ksec-head h2 {
+  font-size: clamp(1.5rem, 2.3vw, 2.0625rem);
+  line-height: 1.2;
+  max-width: 28ch;
+}
+.link-more {
+  font-size: 1.3125rem;
+  text-decoration: none;
+  color: var(--obsidian);
+  white-space: nowrap;
+}
+.link-more:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Collage asimétrico de trabajos */
+.collage {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1.2rem, 2.6vw, 2.4rem) clamp(0.9rem, 1.8vw, 1.6rem);
+}
+.proj {
+  grid-column: span 4;
+}
+.proj.wide {
+  grid-column: span 8;
+}
+.proj.offset {
+  margin-top: 2.6rem;
+}
+.proj a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.proj figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+}
+.proj img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+.proj.wide img {
+  aspect-ratio: 16 / 9;
+}
+.proj a:hover img {
+  opacity: 0.88;
+}
+.proj-title {
+  font-size: 1.3125rem;
+  line-height: 1.25;
+  font-weight: 500;
+  margin-top: 0.7rem;
+}
+.proj-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+/* en piezas estrechas el lugar baja a su propia línea: evita cortes feos */
+.proj:not(.wide) .proj-meta {
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.proj .mono {
+  white-space: nowrap;
+}
+
+/* Servicios: filas editoriales */
+.rows {
+  border-top: 0;
+}
+.row {
+  display: grid;
+  grid-template-columns: 5rem 1.2fr 1.4fr;
+  gap: clamp(1rem, 3vw, 3rem);
+  padding: 1.6rem 0;
+  border-bottom: var(--line);
+  align-items: start;
+}
+.row h3 {
+  font-size: 1.3125rem;
+  line-height: 1.25;
+  font-weight: 500;
+}
+.row ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.row li {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--graphite);
+}
+.row li + li {
+  margin-top: 0.2rem;
+}
+
+/* Estudio */
+.kstudio {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(1.6rem, 4vw, 4rem);
+  align-items: start;
+}
+.kstudio figure {
+  margin: 0;
+}
+.kstudio img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.kstudio h2 {
+  font-size: clamp(1.5rem, 2.3vw, 2.0625rem);
+  line-height: 1.25;
+  margin-bottom: 1.2rem;
+}
+.kstudio p + p {
+  margin-top: 1rem;
+}
+.kstudio .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+/* Proceso */
+.ksteps {
+  display: grid;
+  gap: 0;
+}
+.kstep {
+  display: grid;
+  grid-template-columns: 5rem 1.2fr 1.6fr;
+  gap: clamp(1rem, 3vw, 3rem);
+  padding: 1.5rem 0;
+  border-bottom: var(--line);
+  align-items: baseline;
+}
+.kstep:first-child {
+  border-top: var(--line);
+}
+.kstep h3 {
+  font-size: 1.3125rem;
+  font-weight: 500;
+}
+
+/* Contacto */
+.kcontact {
+  border-top: var(--line);
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+.kcontact h2 {
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  line-height: 1.15;
+  max-width: 20ch;
+  margin-bottom: 1rem;
+}
+.kcontact dl {
+  margin: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+.kcontact dt {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.183em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+.kcontact dd {
+  margin: 0.2rem 0 0;
+  font-size: 1rem;
+  color: var(--obsidian);
+}
+.kcontact a {
+  color: var(--obsidian);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.kcontact a:hover {
+  border-bottom-color: var(--obsidian);
+}
+
+/* ---------- Footer ---------- */
+.kf {
+  border-top: var(--line);
+  background: var(--parchment);
+  padding: 2rem 0 1.4rem;
+}
+.kf-in {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.kf-links {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.kf a {
+  color: var(--obsidian);
+  text-decoration: none;
+}
+.kf a:hover {
+  border-bottom: 1px solid var(--obsidian);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .kb-in {
+    grid-template-columns: 1fr auto;
+    row-gap: 0.6rem;
+    padding: 0.7rem 0;
+  }
+  .kb-mark {
+    order: -1;
+    justify-self: start;
+  }
+  .kb-links {
+    display: none;
+  }
+  .kb-right {
+    justify-self: end;
+  }
+  .khero-copy,
+  .kstudio,
+  .kcontact {
+    grid-template-columns: 1fr;
+  }
+  .proj,
+  .proj.wide {
+    grid-column: span 6;
+  }
+  .proj.offset {
+    margin-top: 0;
+  }
+  .row,
+  .kstep {
+    grid-template-columns: 3.2rem 1fr;
+  }
+  .row ul,
+  .kstep p {
+    grid-column: 2;
+  }
+}
+@media (max-width: 560px) {
+  .proj,
+  .proj.wide {
+    grid-column: span 12;
+  }
+  .wordmark {
+    font-size: clamp(3.4rem, 21vw, 6rem);
+  }
+  .row,
+  .kstep {
+    grid-template-columns: 2.6rem 1fr;
+    gap: 1rem;
+  }
+}
