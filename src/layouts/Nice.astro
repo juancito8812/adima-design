@@ -1,0 +1,118 @@
+---
+import Base from './Base.astro';
+import { site, url } from '../config';
+import '../styles/nice.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  active?: string;
+}
+
+const { title, description, active = 'home' } = Astro.props;
+
+const waLink = `${site.social.whatsapp}?text=${encodeURIComponent(
+  'Hi Adima Design, I would like a quote for a project.'
+)}`;
+
+const links = [
+  { label: 'Services', href: '/#servicios' },
+  { label: 'Work', href: '/#proyectos' },
+  { label: 'Studio', href: '/#estudio' },
+  { label: 'Process', href: '/#proceso' },
+  { label: 'Portfolio', href: '/projects' },
+  { label: 'Testimonials', href: '/testimonials' },
+  { label: 'Journal', href: '/journal' },
+];
+---
+
+<Base title={title} description={description} active={active}>
+  <header class="nb" data-nav>
+    <div class="nb-in">
+      <a class="nb-brand" href={url('/')} aria-label={`${site.name} — home`}>
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <rect x="5" y="5" width="54" height="54" />
+          <path d="M20 46 L32 18 L44 46" />
+          <path d="M25 36 H39" />
+        </svg>
+        <span>
+          <strong>{site.wordmark}</strong>
+          <em>{site.tagline}</em>
+        </span>
+      </a>
+
+      <nav class="nb-links" aria-label="Main">
+        {links.map((l) => <a href={url(l.href)}>{l.label}</a>)}
+      </nav>
+
+      <a class="btn btn-blue nb-cta" href={waLink} target="_blank" rel="noopener">Request a quote</a>
+
+      <button class="nb-burger" type="button" aria-label="Open menu" aria-expanded="false" data-burger>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="nb-drawer" data-drawer hidden>
+      {links.map((l) => <a href={url(l.href)}>{l.label}</a>)}
+      <a class="btn btn-blue" href={waLink} target="_blank" rel="noopener">Request a quote</a>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="nf">
+    <div class="wrap nf-grid">
+      <div>
+        <p class="nf-brand">{site.name}</p>
+        <p class="nf-note">{site.tagline}</p>
+        <p class="nf-note">{site.street}<br />{site.city}</p>
+      </div>
+      <div>
+        <p class="nf-head">Explore</p>
+        {links.map((l) => <a href={url(l.href)}>{l.label}</a>)}
+      </div>
+      <div>
+        <p class="nf-head">Contact</p>
+        <a href={`tel:+${site.whatsapp}`}>{site.phone}</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <a href={waLink} target="_blank" rel="noopener">WhatsApp</a>
+        <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <div>
+        <p class="nf-head">Legal</p>
+        <a href={url('/legal')}>Legal notice</a>
+        <a href={url('/privacy')}>Privacy</a>
+        <p class="nf-note">{site.hours}</p>
+      </div>
+    </div>
+    <div class="wrap nf-bottom">
+      <span>© {new Date().getFullYear()} {site.name}</span>
+      <span>{site.serviceArea}</span>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.querySelector('[data-nav]');
+    const burger = document.querySelector('[data-burger]');
+    const drawer = document.querySelector('[data-drawer]') as HTMLElement | null;
+
+    burger?.addEventListener('click', () => {
+      if (!drawer) return;
+      const open = drawer.hasAttribute('hidden');
+      drawer.toggleAttribute('hidden', !open);
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+
+    drawer?.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => {
+        drawer.setAttribute('hidden', '');
+        burger?.setAttribute('aria-expanded', 'false');
+      })
+    );
+
+    const onScroll = () => header?.classList.toggle('is-stuck', window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  </script>
+</Base>
