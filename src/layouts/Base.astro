@@ -28,7 +28,7 @@ const schema = {
   description: site.description,
   url: new URL(url('/'), Astro.site).toString(),
   image: ogImage.toString(),
-  logo: new URL(url('/favicon.svg'), Astro.site).toString(),
+  logo: new URL(url('/icon-512.png'), Astro.site).toString(),
   email: site.email,
   telephone: `+${site.whatsapp}`,
   priceRange: '$$$',
@@ -59,7 +59,9 @@ const schema = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="icon" href={url('/favicon-32.png')} sizes="32x32" type="image/png" />
+    <link rel="icon" href={url('/icon-192.png')} sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
     <meta name="theme-color" content="#ffffff" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
