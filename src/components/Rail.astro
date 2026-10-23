@@ -22,11 +22,17 @@ const isCurrent = (href: string) => {
 <aside class="rail">
   <div>
     <a class="brand" href={url('/')}>
-      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-        <rect x="4" y="4" width="56" height="56" stroke="#e4e4e4" />
-        <path d="M20 46 L32 18 L44 46" />
-        <path d="M25 36 H39" />
-      </svg>
+      <img
+        class="brand-logo"
+        src={url('/brand/logo-cube-144.webp')}
+        srcset={`${url('/brand/logo-cube-144.webp')} 144w, ${url('/brand/logo-cube-288.webp')} 288w`}
+        sizes="72px"
+        width="72"
+        height="72"
+        alt="Adima Design logo"
+        loading="eager"
+        decoding="async"
+      />
       <span class="brand-name">{site.wordmark}</span>
       <span class="brand-sub">{site.tagline}</span>
     </a>
