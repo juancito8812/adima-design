@@ -86,14 +86,13 @@ export const commitments = [
   },
 ];
 
-/** Vertical rail navigation. */
+/** Vertical rail navigation. One path per intent: what we do, the proof,
+    how we work, who we are, the contact form. */
 export const nav = [
-  { label: 'Home', href: '/', hash: 'inicio' },
   { label: 'Services', href: '/#servicios', hash: 'servicios' },
   { label: 'Work', href: '/#proyectos', hash: 'proyectos' },
-  { label: 'Portfolio', href: '/projects', hash: '' },
+  { label: 'Process', href: '/#proceso', hash: 'proceso' },
   { label: 'Studio', href: '/#estudio', hash: 'estudio' },
-  { label: 'Testimonials', href: '/testimonials', hash: '' },
   { label: 'Journal', href: '/journal', hash: '' },
   { label: 'Contact', href: '/#contacto', hash: 'contacto' },
 ];

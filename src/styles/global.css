@@ -115,8 +115,12 @@ p { margin: 0 0 1.1rem; }
   #inicio { display: flex; flex-direction: column; }
   #inicio > .eyebrow { order: 1; }
   #inicio > h1 { order: 2; }
-  #inicio > .hero-media { order: 3; margin: 1.5rem 0 1.9rem; }
-  #inicio > .intro { order: 4; }
+  /* El CTA va justo bajo el titular en el teléfono: si baja tras la foto,
+     queda a más de una pantalla de scroll. */
+  #inicio > .hero-actions { order: 3; margin-top: 0.4rem; }
+  #inicio > .hero-note { order: 4; margin-bottom: 1.4rem; }
+  #inicio > .hero-media { order: 5; margin: 0 0 1.9rem; }
+  #inicio > .intro { order: 6; }
   .brand svg { width: 42px; height: 42px; margin-bottom: 0.5rem; }
   .brand-sub { font-size: 0.75rem; }
 }
@@ -228,6 +232,35 @@ p { margin: 0 0 1.1rem; }
   color: var(--ink);
 }
 .intro-links { display: flex; gap: 1.8rem; margin-top: 1.6rem; }
+
+/* ---------- Botones ---------- */
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2rem; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 1.7rem;
+  background: var(--ink);
+  color: #fff;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-outline { background: transparent; color: var(--ink); }
+.btn-outline:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.hero-note {
+  margin: 0.9rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+@media (max-width: 560px) { .hero-actions .btn { flex: 1 1 100%; } }
 
 /* ---------- Servicios ---------- */
 .services {
